@@ -301,6 +301,7 @@ header .wrapper {
 
 /* main */
 main .wrapper {
+  height: 80vh;
   background-color: red;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
@@ -318,4 +319,34 @@ main .wrapper {
 .spine {
   background-color: pink;
   width: 2%;
+}
+
+.leftPanel {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.rightPanel {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.rightPanel .textContainer {
+  height: 40%;
+  background-color: green;
+}
+.rightPanel .inputContainer {
+  height: 10%;
+  background-color: grey;
 }
