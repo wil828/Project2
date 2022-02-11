@@ -4,36 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
     <title>PokemonxWordle</title>
 </head>
 <body>
     <header>
         <!-- START .wrapper START -->
-        <div class="wrapper">
+        <div class="wrapper flexContainer">
             <!-- help and scoreboard if time permits -->
-            <i></i><!-- help -->
+            <i>help</i><!-- help -->
             <h1>PokemonxWordle</h1>
-            <i></i><!-- scoreboard -->
+            <i>scoreboard</i><!-- scoreboard -->
         </div><!-- END .wrapper END -->
     </header>
 
     <main class="indexMain" id="indexMain">
         <!-- START .wrapper START -->
-        <div class="wrapper">
+        <div class="wrapper flexContainer">
 
             <section class="banner" id="banner">
                 <!-- <img src="/assets/Pokemon-Logo.png" alt="Pokemon logo"> -->
             </section>
 
             <!-- START .leftPanel START -->
-            <section class="leftPanel">
+            <section class="leftPanel" id="leftPanel">
                 <!-- START imgContainer START -->
                 <div class="imgContainer">
-                    <img src="" alt=""><!-- maybe a default picture of a pokeball? -->
+                    <img src="" alt="" style="width:100px; height:100px;"><!-- maybe a default picture of a pokeball? -->
                 </div><!-- END .imgContainer END -->
             </section><!-- END .leftPanel END -->
 
-            <section class="spine"></section>
+            <section class="spine" id="spine"></section>
 
             <!-- START .rightPanel START -->
             <section class="rightPanel" id="rightPanel">
@@ -54,9 +55,11 @@
     </main>
 
     <footer>
-        <p>Juno Project 2 - Working with APIs</p>
-        <p>Inspired by Pokemon and Wordle</p>
-        <p>William Wong and Alvin Chou</p>
+        <div class="wrapper">
+            <p>Juno Project 2 - Working with APIs</p>
+            <p>Inspired by Pokemon and Wordle</p>
+            <p>William Wong and Alvin Chou</p>
+        </div>
     </footer>
 </body>
 </html>

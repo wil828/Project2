@@ -1,0 +1,31 @@
+/* _section.scss */
+.wrapper {
+    border: 3px solid rgb(179, 255, 0);
+}
+
+/* header */
+header .wrapper{
+    background-color: $tertiary;
+    justify-content: space-between;
+
+}
+
+
+/* main */
+main .wrapper {
+    background-color: $primary;
+    justify-content: space-between;
+}
+
+.banner {
+    display: absolute;
+}
+
+.leftPanel, .rightPanel {
+    width: 44%;
+}
+
+.spine {
+    background-color: pink;
+    width: 2%;
+}

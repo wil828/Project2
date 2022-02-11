@@ -1,3 +1,4 @@
+/* _setup.scss */
 @import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Ubuntu&display=swap");
 html {
   line-height: 1.15;
@@ -229,4 +230,92 @@ template {
           clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
+}
+
+/* _variables.scss */
+/* _baseStyles.scss */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 125%;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+.wrapper {
+  max-width: 1400px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.flexContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+/* _typography.scss */
+h1 {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 2rem;
+}
+
+p {
+  font-family: "Ubuntu", sans-serif;
+}
+
+footer p {
+  font-size: 0.5rem;
+}
+
+.button {
+  font-family: "Ubuntu", sans-serif;
+}
+
+/* _section.scss */
+.wrapper {
+  border: 3px solid #b3ff00;
+}
+
+/* header */
+header .wrapper {
+  background-color: blue;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+/* main */
+main .wrapper {
+  background-color: red;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.banner {
+  display: absolute;
+}
+
+.leftPanel, .rightPanel {
+  width: 44%;
+}
+
+.spine {
+  background-color: pink;
+  width: 2%;
 }
