@@ -4,9 +4,63 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
     <title>PokemonxWordle</title>
 </head>
 <body>
     <script src="script.js"></script>
+    <header>
+        <!-- START .wrapper START -->
+        <div class="wrapper flexContainer">
+            <!-- help and scoreboard if time permits -->
+            <i>help</i><!-- help -->
+            <h1>PokemonxWordle</h1>
+            <i>scoreboard</i><!-- scoreboard -->
+        </div><!-- END .wrapper END -->
+    </header>
+
+    <main class="indexMain" id="indexMain">
+        <!-- START .wrapper START -->
+        <div class="wrapper flexContainer">
+
+            <section class="banner" id="banner">
+                <!-- <img src="/assets/Pokemon-Logo.png" alt="Pokemon logo"> -->
+            </section>
+
+            <!-- START .leftPanel START -->
+            <section class="leftPanel flexContainer" id="leftPanel">
+                <!-- START imgContainer START -->
+                <div class="imgContainer">
+                    <img src="" alt="" style="width:100px; height:100px;"><!-- maybe a default picture of a pokeball? -->
+                </div><!-- END .imgContainer END -->
+            </section><!-- END .leftPanel END -->
+
+            <section class="spine" id="spine"></section>
+
+            <!-- START .rightPanel START -->
+            <section class="rightPanel flexContainer" id="rightPanel">
+
+                <!-- START .textContainer START -->
+                <div class="textContainer">
+                    <p>you win / you lose</p><!-- currently a place to display you win / you lose will replace with wordle if time permits -->
+                </div><!-- END .textContainer END -->
+
+                <!-- START .inputContainer START -->
+                <div class="inputContainer">
+                    <label for="guess" class="sr-only">Guess your Pokemon</label>
+                    <input type="text" id="guess" placeholder="Guess your Pokemon">
+                    <button class="submit" type="submit">Go!</button>
+                </div><!-- END .inputContainer END -->
+            </section><!-- END .rightPanel END -->
+        </div><!-- END .wrapper END -->
+    </main>
+
+    <footer>
+        <div class="wrapper">
+            <p>Juno Project 2 - Working with APIs</p>
+            <p>Inspired by Pokemon and Wordle</p>
+            <p>William Wong and Alvin Chou</p>
+        </div>
+    </footer>
 </body>
 </html>

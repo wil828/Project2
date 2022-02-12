@@ -1,0 +1,33 @@
+/* _baseStyles.scss */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 125%;
+}
+
+img {
+    width: 100%;
+    display: block;
+}
+
+.wrapper {
+    max-width: 1400px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.flexContainer {
+    display: flex;
+}

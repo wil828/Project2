@@ -1,0 +1,51 @@
+/* _section.scss */
+.wrapper {
+    border: 3px solid rgb(179, 255, 0);
+}
+
+/* header */
+header .wrapper{
+    background-color: $tertiary;
+    justify-content: space-between;
+
+}
+
+
+/* main */
+main .wrapper {
+    height: 80vh;
+    background-color: $primary;
+    justify-content: space-between;
+}
+
+.banner {
+    display: absolute;
+}
+
+.leftPanel, .rightPanel {
+    width: 44%;
+}
+
+.spine {
+    background-color: pink;
+    width: 2%;
+}
+
+.leftPanel {
+    justify-content: center;
+    align-items: center;
+}
+
+.rightPanel {
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    .textContainer {
+        height: 40%;
+        background-color: $secondary;
+    }
+    .inputContainer {
+        height: 10%;
+        background-color: grey;
+    }
+}
