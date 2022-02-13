@@ -10,6 +10,7 @@ pokemonApp.init = () => {
     // new variable for amount of pokemon
     pokemonApp.limit = 151;
     pokemonApp.getPokemon();
+    pokemonApp.colourRings();
 }
 
 // Create a method which will request information for the API (pokemonApp.getPokemon)
@@ -96,9 +97,66 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
 // Restarts when the user clicks “Play again” (eventListener)
 
 
+// Build a method that will blur picture with rings
+pokemonApp.colourRings = () => {
+    // Create a canvas that will live on top of imgContainer
+    const canvasElement = document.createElement('canvas');
+    canvasElement.classList.add('rings');
+    // set the width and height of canvas to match div
+    canvasElement.width = document.querySelector('.leftPanel').children[0].offsetWidth;
+    canvasElement.height = document.querySelector('.leftPanel').children[0].offsetHeight;
+    // console.log(canvasElement.style);
+    canvasElement.style.position = "absolute";
+    Object.assign(canvasElement.style, {
+        border: "2px dotted darkgreen",
+        // backgroundColor: "rgba(0,255,0,0.2)",
+        // backdropFilter: "blur(100px)",
+        // backdropFilter: "blur(10px)",
+    })
+    // backdropFileter not supported in firefox
+    // console.log(CSS.supports("backdropFilter: solid"))
+    // console.log(CSS.supports("position, relatve"))
+    // console.log(CSS.supports("text-decoration-style", "blink"))
+    // console.log(CSS.supports("display: flex"))
+    // console.log(CSS.supports("text-decoration-style: blink"))
+    document.querySelector('.leftPanel').appendChild(canvasElement);
+
+    // create a circle inside the canvasElement
+    const canvas = document.querySelector('.rings');
+    const ctx = canvas.getContext('2d');
+    console.log(canvasElement.width)
+
+    
+    //create a function to creat 50 ring at a random location
+    for (let numberOfRings = 0; numberOfRings < 50; numberOfRings++) {
+        ctx.beginPath();
+        let x = Math.floor(Math.random() * canvasElement.width);
+        let y = Math.floor(Math.random() * canvasElement.height);
+        let radius = 50;
+        let startAngle = 0;
+        let endAngle = 2 * Math.PI;
+        
+        ctx.arc(x, y, radius, startAngle, endAngle);
+        ctx.arc(x, y, radius-15, 0, 2 * Math.PI);
+        ctx.fillStyle = pokemonApp.randomColour();
+        ctx.fill("evenodd");
+    };
+}
+// create a method that randomly returns a colour 
+pokemonApp.randomColour = () => {
+    const colourPicker = Math.floor(Math.random() * 5);
+    if (colourPicker === 0) {
+        return '#ff0000'
+    } else if (colourPicker === 1) {
+        return '#cc0000'
+    } else if (colourPicker === 2) {
+        return '#3b4cca'
+    } else if (colourPicker === 3) {
+        return '#ffde00'
+    } else  {
+        return '#b3a125'
+    };
+};
+
 // Call the init method
 pokemonApp.init();
-
-
-
-test 
