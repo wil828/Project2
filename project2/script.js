@@ -98,3 +98,7 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
 
 // Call the init method
 pokemonApp.init();
+
+
+
+test 
