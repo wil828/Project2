@@ -9,7 +9,6 @@ pokemonApp.apiURL = 'https://pokeapi.co/api/v2/pokemon/';
 pokemonApp.init = () => {
     // new variable for amount of pokemon
     pokemonApp.limit = 151;
-    
     pokemonApp.getPokemon();
 }
 
@@ -60,17 +59,39 @@ pokemonApp.randomPokemon = (datafromApi) => {
 
 // Build a method that will display the picture of the chosen pokemon and append it (pokemonApp.chosenPokemon)
 pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
-    // console.log(dataFromRandomPokemon);
+    console.log(dataFromRandomPokemon);
     // create variable to hold picture URL given from pokeAPI.co
     const chosenPokemonPicture = dataFromRandomPokemon.sprites.other['official-artwork']['front_default'];
     console.log(chosenPokemonPicture);
 
-    // look for the ul
+    // look for the img
+    const img = document.querySelector('.leftPanel').children[0].children[0];
+    img.src = chosenPokemonPicture;
+    img.style.filter = 'blur(8px)';
+    // console.log(img);
     
-
+    // Build a method that will compare user input to displayed pokemon and append user input to list (pokemonApp.checkAnswer)
+    // added an event listener for when the submit button is pressed
+    document.querySelector('.submit').addEventListener('click', () => {
+        // tracking the user input of the pokemon name guess
+        const userInput = document.querySelector('#guess');
+        // console.log(userInput);
+        console.log(dataFromRandomPokemon.name);
+        console.log(userInput.value.toLowerCase());
+        if ( dataFromRandomPokemon.name === userInput.value.toLowerCase()) {
+            document.querySelector('.rightPanel').querySelector('p').innerText = "you win!";
+        } else
+            document.querySelector('.rightPanel').querySelector('p').innerText = "That is wrong.  Please try again!";
+    });
 }
 
-// Build a method that will compare user input to displayed pokemon and append user input to list (pokemonApp.checkAnswer)
+
+
+
+
+
+
+
 // Build a method that will display pokemon img and name on a pop up upon correct guess (pokemonApp.correctAnswer)
 // Restarts when the user clicks “Play again” (eventListener)
 
