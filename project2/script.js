@@ -97,7 +97,7 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
 
 
 console.log(document.querySelector('.leftPanel').querySelector('.imgContainer'));
-console.log(document.querySelector('.leftPanel').querySelector('.imgContainer'));
+console.log(document.querySelector('.leftPanel').querySelector('.imgContainer').offsetWidth);
 
 
 // Build a method that will display pokemon img and name on a pop up upon correct guess (pokemonApp.correctAnswer)
@@ -108,8 +108,8 @@ pokemonApp.colourRings = () => {
     const canvasElement = document.createElement('canvas');
     canvasElement.classList.add('rings');
     // set the width and height of canvas to match div
-    canvasElement.width = 350;
-    canvasElement.height = 350;
+    // canvasElement.width = 350;
+    // canvasElement.height = 350;
     // canvasElement.width = document.querySelector('.leftPanel').querySelector('.imgContainer').offsetWidth;
     // canvasElement.height = document.querySelector('.leftPanel').querySelector('.imgContainer').offsetHeight;
     // console.log(canvasElement.style);
@@ -126,7 +126,7 @@ pokemonApp.colourRings = () => {
     // console.log(CSS.supports("text-decoration-style", "blink"))
     // console.log(CSS.supports("display: flex"))
     // console.log(CSS.supports("text-decoration-style: blink"))
-    document.querySelector('.leftPanel').appendChild(canvasElement);
+    document.querySelector('.imgContainer').appendChild(canvasElement);
 
     // create a circle inside the canvasElement
     const canvas = document.querySelector('.rings');
@@ -139,12 +139,12 @@ pokemonApp.colourRings = () => {
         ctx.beginPath();
         let x = Math.floor(Math.random() * canvasElement.width);
         let y = Math.floor(Math.random() * canvasElement.height);
-        let radius = 50;
+        let radius = 25;
         let startAngle = 0;
         let endAngle = 2 * Math.PI;
         
         ctx.arc(x, y, radius, startAngle, endAngle);
-        ctx.arc(x, y, radius-15, 0, 2 * Math.PI);
+        ctx.arc(x, y, radius-10, 0, 2 * Math.PI);
         ctx.fillStyle = pokemonApp.randomColour();
         ctx.fill("evenodd");
     };

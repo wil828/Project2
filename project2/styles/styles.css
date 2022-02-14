@@ -358,6 +358,13 @@ main .wrapper {
 .leftPanel .imgContainer {
   border: 10px solid black;
   max-width: 375px;
+  position: relative;
+}
+.leftPanel .imgContainer canvas {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .rightPanel {
