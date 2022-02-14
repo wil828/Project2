@@ -12,9 +12,9 @@ pokemonApp.init = () => {
     pokemonApp.getPokemon();
     pokemonApp.colourRings();
     // document.getElementById('help').checked = 'true';
-    console.log('init check status: ', (document.getElementById('help').checked))
+    // console.log('init check status: ', (document.getElementById('help').checked))
     pokemonApp.help(document.getElementById('help').checked);
-    console.log('init check status: ', (document.getElementById('help').checked))
+    // console.log('init check status: ', (document.getElementById('help').checked))
 }
 
 // Create a method which will request information for the API (pokemonApp.getPokemon)
@@ -96,20 +96,22 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
 
 
 
+console.log(document.querySelector('.leftPanel').querySelector('.imgContainer'));
+console.log(document.querySelector('.leftPanel').querySelector('.imgContainer'));
 
 
 // Build a method that will display pokemon img and name on a pop up upon correct guess (pokemonApp.correctAnswer)
 // Restarts when the user clicks “Play again” (eventListener)
-
-
 // Build a method that will blur picture with rings
 pokemonApp.colourRings = () => {
     // Create a canvas that will live on top of imgContainer
     const canvasElement = document.createElement('canvas');
     canvasElement.classList.add('rings');
     // set the width and height of canvas to match div
-    canvasElement.width = document.querySelector('.leftPanel').querySelector('.imgContainer').offsetWidth;
-    canvasElement.height = document.querySelector('.leftPanel').querySelector('.imgContainer').offsetHeight;
+    canvasElement.width = 350;
+    canvasElement.height = 350;
+    // canvasElement.width = document.querySelector('.leftPanel').querySelector('.imgContainer').offsetWidth;
+    // canvasElement.height = document.querySelector('.leftPanel').querySelector('.imgContainer').offsetHeight;
     // console.log(canvasElement.style);
     canvasElement.style.position = "absolute";
     Object.assign(canvasElement.style, {
@@ -147,6 +149,8 @@ pokemonApp.colourRings = () => {
         ctx.fill("evenodd");
     };
 }
+
+
 // create a method that randomly returns a colour 
 pokemonApp.randomColour = () => {
     const colourPicker = Math.floor(Math.random() * 4);
@@ -175,27 +179,41 @@ pokemonApp.helpTab = () => {
     return helpTabDivElement
 }
 
+// cerat a method that will append or remove the helpTab
 pokemonApp.help = () => {
-    console.log('pokemonApp.help status ', status);
+    // console.log('pokemonApp.help status ', status);
     if (!document.getElementById('helpTab')) {
         //if help is check append
-        console.log("status true");
+        // console.log("status true");
         document.querySelector('main').appendChild(pokemonApp.helpTab());
         // console.log(helpTab);
     } else if (document.getElementById('helpTab')) {
-        console.log("status false");
+        // console.log("status false");
         // else remove the helpTab
         document.querySelector('main').removeChild(document.getElementById('helpTab'))
     };
 };
 
-
 // event listener for when the ? is clicked 
 document.querySelector('.fa-question').addEventListener('click', () => {
-    console.log("eventlistener status: ", document.getElementById('help').checked);
-    pokemonApp.help(document.getElementById('help').checked);
-    console.log('--------');
+    // console.log("eventlistener status: ", document.getElementById('help').checked);
+    pokemonApp.help();
+    // console.log('--------');
 });
+
+//event listerner to close th helpTab when you click anyhere on the page
+document.querySelector('html').addEventListener('click', (e) => {
+    // console.log('etarget ', e.target);
+    //except when you click on the ? again
+    if (e.target === document.querySelector('.fa-question') || e.target === document.getElementById('help')) {
+        // console.log('true'); 
+        return;
+    } else if (document.getElementById('helpTab')) {
+        // console.log("status false");
+        // else remove the helpTab
+        document.querySelector('main').removeChild(document.getElementById('helpTab'))
+    };
+})
 
 // Call the init method
 pokemonApp.init();
