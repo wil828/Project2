@@ -68,7 +68,7 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
     // look for the img
     const img = document.querySelector('.leftPanel').children[0].children[0];
     img.src = chosenPokemonPicture;
-    img.style.filter = 'blur(8px)';
+    // img.style.filter = 'blur(8px)';
     // console.log(img);
     
     // Build a method that will compare user input to displayed pokemon and append user input to list (pokemonApp.checkAnswer)
@@ -107,12 +107,12 @@ pokemonApp.colourRings = () => {
     canvasElement.height = document.querySelector('.leftPanel').children[0].offsetHeight;
     // console.log(canvasElement.style);
     canvasElement.style.position = "absolute";
-    Object.assign(canvasElement.style, {
-        border: "2px dotted darkgreen",
-        // backgroundColor: "rgba(0,255,0,0.2)",
-        // backdropFilter: "blur(100px)",
-        // backdropFilter: "blur(10px)",
-    })
+    // Object.assign(canvasElement.style, {
+    //     border: "2px dotted darkgreen",
+    //     // backgroundColor: "rgba(0,255,0,0.2)",
+    //     // backdropFilter: "blur(100px)",
+    //     // backdropFilter: "blur(10px)",
+    // })
     // backdropFileter not supported in firefox
     // console.log(CSS.supports("backdropFilter: solid"))
     // console.log(CSS.supports("position, relatve"))
@@ -144,14 +144,12 @@ pokemonApp.colourRings = () => {
 }
 // create a method that randomly returns a colour 
 pokemonApp.randomColour = () => {
-    const colourPicker = Math.floor(Math.random() * 5);
+    const colourPicker = Math.floor(Math.random() * 4);
     if (colourPicker === 0) {
         return '#ff0000'
     } else if (colourPicker === 1) {
-        return '#cc0000'
-    } else if (colourPicker === 2) {
         return '#3b4cca'
-    } else if (colourPicker === 3) {
+    } else if (colourPicker === 2) {
         return '#ffde00'
     } else  {
         return '#b3a125'
