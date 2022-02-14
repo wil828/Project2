@@ -12,6 +12,10 @@ pokemonApp.init = () => {
     pokemonApp.limit = 151;
     pokemonApp.getPokemon();
     pokemonApp.colourRings();
+    // document.getElementById('help').checked = 'true';
+    // console.log('init check status: ', (document.getElementById('help').checked))
+    pokemonApp.help(document.getElementById('help').checked);
+    // console.log('init check status: ', (document.getElementById('help').checked))
 }
 
 // Create a method which will request information for the API (pokemonApp.getPokemon)
@@ -29,7 +33,7 @@ pokemonApp.getPokemon = () => {
     })
     
     .then (function(jsonResponse) {
-        console.log(jsonResponse);
+        // console.log(jsonResponse);
         pokemonApp.randomPokemon(jsonResponse);
     })
 
@@ -40,13 +44,13 @@ pokemonApp.getPokemon = () => {
 pokemonApp.randomPokemon = (datafromApi) => {
     // creating a variable to choose a random pokemon
     const randomIndex = Math.floor(Math.random() * pokemonApp.limit);
-    console.log(randomIndex);
+    // console.log(randomIndex);
     
     // Calling the array with the random number given to find the pokemon
     const randomPokemonUrl = datafromApi.results[randomIndex].url;
     // const randomPokemonPic = randomPokemonData.sprites.other."official-artwork"."front_default";
     // console.log(randomPokemonPic);
-    console.log(randomPokemonUrl);
+    // console.log(randomPokemonUrl);
     fetch(randomPokemonUrl)
     .then (function(aResponse) {
         return aResponse.json()
@@ -61,17 +65,18 @@ pokemonApp.randomPokemon = (datafromApi) => {
 
 // Build a method that will display the picture of the chosen pokemon and append it (pokemonApp.chosenPokemon)
 pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
-    console.log(dataFromRandomPokemon);
+    // console.log(dataFromRandomPokemon);
     // create variable to hold picture URL given from pokeAPI.co
     const chosenPokemonPicture = dataFromRandomPokemon.sprites.other['official-artwork']['front_default'];
-    console.log(chosenPokemonPicture);
+    // console.log(chosenPokemonPicture);
 
     // look for the img
-    const img = document.querySelector('.leftPanel').children[0].children[0];
+    const img = document.createElement('img')
+
     img.src = chosenPokemonPicture;
     // img.style.filter = 'blur(8px)';
     // console.log(img);
-    
+    document.querySelector('.leftPanel').children[0].appendChild(img);
     // Build a method that will compare user input to displayed pokemon and append user input to list (pokemonApp.checkAnswer)
 
     // adding a variable to keep track of guesses
@@ -127,40 +132,42 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
 
 
 
+console.log(document.querySelector('.leftPanel').querySelector('.imgContainer'));
+console.log(document.querySelector('.leftPanel').querySelector('.imgContainer').offsetWidth);
 
 
 // Build a method that will display pokemon img and name on a pop up upon correct guess (pokemonApp.correctAnswer)
 // Restarts when the user clicks “Play again” (eventListener)
-
-
 // Build a method that will blur picture with rings
 pokemonApp.colourRings = () => {
     // Create a canvas that will live on top of imgContainer
     const canvasElement = document.createElement('canvas');
     canvasElement.classList.add('rings');
     // set the width and height of canvas to match div
-    canvasElement.width = document.querySelector('.leftPanel').children[0].offsetWidth;
-    canvasElement.height = document.querySelector('.leftPanel').children[0].offsetHeight;
+    // canvasElement.width = 350;
+    // canvasElement.height = 350;
+    // canvasElement.width = document.querySelector('.leftPanel').querySelector('.imgContainer').offsetWidth;
+    // canvasElement.height = document.querySelector('.leftPanel').querySelector('.imgContainer').offsetHeight;
     // console.log(canvasElement.style);
     canvasElement.style.position = "absolute";
-    // Object.assign(canvasElement.style, {
-    //     border: "2px dotted darkgreen",
-    //     // backgroundColor: "rgba(0,255,0,0.2)",
-    //     // backdropFilter: "blur(100px)",
-    //     // backdropFilter: "blur(10px)",
-    // })
+    Object.assign(canvasElement.style, {
+        border: "2px dotted darkgreen",
+        // backgroundColor: "rgba(0,255,0,0.2)",
+        // backdropFilter: "blur(100px)",
+        // backdropFilter: "blur(10px)",
+    })
     // backdropFileter not supported in firefox
     // console.log(CSS.supports("backdropFilter: solid"))
     // console.log(CSS.supports("position, relatve"))
     // console.log(CSS.supports("text-decoration-style", "blink"))
     // console.log(CSS.supports("display: flex"))
     // console.log(CSS.supports("text-decoration-style: blink"))
-    document.querySelector('.leftPanel').appendChild(canvasElement);
+    document.querySelector('.imgContainer').appendChild(canvasElement);
 
     // create a circle inside the canvasElement
     const canvas = document.querySelector('.rings');
     const ctx = canvas.getContext('2d');
-    console.log(canvasElement.width)
+    // console.log(canvasElement.width)
 
     
     //create a function to creat 50 ring at a random location
@@ -168,16 +175,18 @@ pokemonApp.colourRings = () => {
         ctx.beginPath();
         let x = Math.floor(Math.random() * canvasElement.width);
         let y = Math.floor(Math.random() * canvasElement.height);
-        let radius = 50;
+        let radius = 25;
         let startAngle = 0;
         let endAngle = 2 * Math.PI;
         
         ctx.arc(x, y, radius, startAngle, endAngle);
-        ctx.arc(x, y, radius-15, 0, 2 * Math.PI);
+        ctx.arc(x, y, radius-10, 0, 2 * Math.PI);
         ctx.fillStyle = pokemonApp.randomColour();
         ctx.fill("evenodd");
     };
 }
+
+
 // create a method that randomly returns a colour 
 pokemonApp.randomColour = () => {
     const colourPicker = Math.floor(Math.random() * 4);
@@ -191,6 +200,57 @@ pokemonApp.randomColour = () => {
         return '#b3a125'
     };
 };
+
+
+// create a method that will open up a "how to play" tab
+// create a method that returns the helpTab
+pokemonApp.helpTab = () => {
+    helpTabDivElement = document.createElement('div');
+    helpTabDivElement.classList.add('helpTab')
+    helpTabDivElement.id = 'helpTab'
+    helpTabDivElement.innerHTML = `
+        <p>How to play</p>
+        <p>Guess that Pokemon in six tries.</p>
+        <p>After each guess, the number of rings decrease.</p>
+    `;
+    return helpTabDivElement
+}
+
+// cerat a method that will append or remove the helpTab
+pokemonApp.help = () => {
+    // console.log('pokemonApp.help status ', status);
+    if (!document.getElementById('helpTab')) {
+        //if help is check append
+        // console.log("status true");
+        document.querySelector('main').appendChild(pokemonApp.helpTab());
+        // console.log(helpTab);
+    } else if (document.getElementById('helpTab')) {
+        // console.log("status false");
+        // else remove the helpTab
+        document.querySelector('main').removeChild(document.getElementById('helpTab'))
+    };
+};
+
+// event listener for when the ? is clicked 
+document.querySelector('.fa-question').addEventListener('click', () => {
+    // console.log("eventlistener status: ", document.getElementById('help').checked);
+    pokemonApp.help();
+    // console.log('--------');
+});
+
+//event listerner to close th helpTab when you click anyhere on the page
+document.querySelector('html').addEventListener('click', (e) => {
+    // console.log('etarget ', e.target);
+    //except when you click on the ? again
+    if (e.target === document.querySelector('.fa-question') || e.target === document.getElementById('help')) {
+        // console.log('true'); 
+        return;
+    } else if (document.getElementById('helpTab')) {
+        // console.log("status false");
+        // else remove the helpTab
+        document.querySelector('main').removeChild(document.getElementById('helpTab'))
+    };
+})
 
 
 // Call the init method
