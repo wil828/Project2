@@ -1,22 +1,42 @@
 /* _section.scss */
+/* body */
+body {
+    background-image: url(../assets/grass-background.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    // height: 100vh;
+    background-size: cover;
+    position: relative;
+    // background-color: purple;
+}
+
 /* header */
 header .wrapper{
+    margin-top: 30px;
     background-color: $tertiary;
     justify-content: space-between;
+    border-radius: 30px 30px 0 0;
+    box-shadow: 0px -10px 20px 10px rgba(0,0,0,0.35);
+    i {
+        color: #ffde00;
+    }
 }
 
 
 /* main */
 main .wrapper {
     height: 80vh;
+    margin-bottom: 30px;
     background-color: $primary;
     justify-content: space-between;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0px 10px 20px 10px rgba(0,0,0,0.5);
     // position: relative;
 }
 
 .banner {
     position: absolute;
-    width: 20vh;
+    width: 30vh;
     left: 50%;
     transform: translate(-50%);
 }
@@ -24,6 +44,7 @@ main .wrapper {
 .leftPanel, .rightPanel {
     width: 100%;
     margin-top: 200px;
+    padding: 0 5%;
 }
 
 .spine {
@@ -34,6 +55,10 @@ main .wrapper {
 .leftPanel {
     justify-content: center;
     align-items: center;
+    .imgContainer {
+        // border: 1px solid black;
+        max-width: 375px;
+    }
 }
 
 .rightPanel {
@@ -41,24 +66,26 @@ main .wrapper {
     justify-content: space-evenly;
     align-items: center;
     .textContainer {
-        width: 80%;
-        height: 40%;
+        width: 100%;
+        height: 200px;
         background-color: $secondary;
     }
     .inputContainer {
-        width: 80%;
-        height: 10%;
+        width: 100%;
         input {
             width: 80%;
             background-color: #b6b8b6;
         };
         .submit {
-            width: 20%
+            width: 20%;
+            background-color: $primary;
         }
     }
 }
 
 footer {
-    background-color: $secondary;
+    // background-color: $secondary;
     text-align: center;
+    position: relative;
+    bottom:0;
 }
