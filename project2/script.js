@@ -12,7 +12,7 @@ pokemonApp.init = () => {
     pokemonApp.getPokemon();
     pokemonApp.colourRings();
     // document.getElementById('help').checked = 'true';
-    console.log(document.getElementById('help').checked);
+    console.log('init check status: ', (document.getElementById('help').checked))
     pokemonApp.help(document.getElementById('help').checked);
     console.log('init check status: ', (document.getElementById('help').checked))
 }
@@ -175,14 +175,15 @@ pokemonApp.helpTab = () => {
     return helpTabDivElement
 }
 
-pokemonApp.help = (status) => {
-    console.log('status ', status);
-    if (status) {
+pokemonApp.help = () => {
+    console.log('pokemonApp.help status ', status);
+    if (!document.getElementById('helpTab')) {
         //if help is check append
-        console.log("if checked do this");
+        console.log("status true");
         document.querySelector('main').appendChild(pokemonApp.helpTab());
         // console.log(helpTab);
-    } else if (status == false) {
+    } else if (document.getElementById('helpTab')) {
+        console.log("status false");
         // else remove the helpTab
         document.querySelector('main').removeChild(document.getElementById('helpTab'))
     };
@@ -191,9 +192,9 @@ pokemonApp.help = (status) => {
 
 // event listener for when the ? is clicked 
 document.querySelector('.fa-question').addEventListener('click', () => {
-    console.log("click working status:");
-    console.log(document.getElementById('help').checked);
+    console.log("eventlistener status: ", document.getElementById('help').checked);
     pokemonApp.help(document.getElementById('help').checked);
+    console.log('--------');
 });
 
 // Call the init method
