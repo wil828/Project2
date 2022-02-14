@@ -73,18 +73,53 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
     // console.log(img);
     
     // Build a method that will compare user input to displayed pokemon and append user input to list (pokemonApp.checkAnswer)
-    // added an event listener for when the submit button is pressed
-    document.querySelector('.submit').addEventListener('click', () => {
-        // tracking the user input of the pokemon name guess
-        const userInput = document.querySelector('#guess');
-        // console.log(userInput);
-        console.log(dataFromRandomPokemon.name);
-        console.log(userInput.value.toLowerCase());
-        if ( dataFromRandomPokemon.name === userInput.value.toLowerCase()) {
-            document.querySelector('.rightPanel').querySelector('p').innerText = "you win!";
-        } else
-            document.querySelector('.rightPanel').querySelector('p').innerText = "That is wrong.  Please try again!";
-    });
+
+    // adding a variable to keep track of guesses
+    let numberOfGuesses = 0;
+
+    // added an event listener for when the submit button is pressed and increase the amount of guesses
+
+        document.querySelector('.submit').addEventListener('click', () => {
+            // added an if statement to only allow the user to guess if guesses < 6
+            if ( numberOfGuesses < 6) {
+                // tracking the user input of the pokemon name guess
+                const userInput = document.querySelector('#guess');
+
+                // creating a variable to display the users guess
+                let userGuessDisplay = document.createElement("p");
+                userGuessDisplay.textContent = `${numberOfGuesses+1}) ${userInput.value.toLowerCase()}`;
+                document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
+
+                // let userFinalResult = document.createElement("p");
+                // userFinalResult.textContent = 
+
+                // console.log(userInput);
+                // console.log(dataFromRandomPokemon.name);
+                // console.log(userInput.value.toLowerCase());
+    
+                if ( dataFromRandomPokemon.name === userInput.value.toLowerCase()) {
+                    document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
+
+                    document.querySelector('.rightPanel').querySelector('p').innerText = "you win!";
+                    numberOfGuesses = 6;
+
+    
+                } else if (numberOfGuesses < 5) {
+                    numberOfGuesses = numberOfGuesses + 1;
+                    // document.querySelector('.rightPanel').querySelector('p').innerText = "That is wrong.  Please try again!";
+                    console.log(numberOfGuesses);
+    
+                } else if ( numberOfGuesses === 5) {
+                    document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
+                    document.querySelector('.rightPanel').querySelector('p').innerText = "You aren't a pokemon master.";
+                    numberOfGuesses = numberOfGuesses + 1;
+                }
+
+            }
+
+
+        });
+
 }
 
 
@@ -156,6 +191,7 @@ pokemonApp.randomColour = () => {
         return '#b3a125'
     };
 };
+
 
 // Call the init method
 pokemonApp.init();
