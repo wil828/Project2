@@ -356,6 +356,7 @@ main .wrapper {
           align-items: center;
 }
 .leftPanel .imgContainer {
+  border: 1px solid black;
   max-width: 375px;
 }
 

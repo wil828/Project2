@@ -11,6 +11,7 @@ pokemonApp.init = () => {
     pokemonApp.limit = 151;
     pokemonApp.getPokemon();
     pokemonApp.colourRings();
+    pokemonApp.help();
 }
 
 // Create a method which will request information for the API (pokemonApp.getPokemon)
@@ -66,11 +67,12 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
     console.log(chosenPokemonPicture);
 
     // look for the img
-    const img = document.querySelector('.leftPanel').children[0].children[0];
+    const img = document.createElement('img')
+
     img.src = chosenPokemonPicture;
     // img.style.filter = 'blur(8px)';
     // console.log(img);
-    
+    document.querySelector('.leftPanel').children[0].appendChild(img);
     // Build a method that will compare user input to displayed pokemon and append user input to list (pokemonApp.checkAnswer)
     // added an event listener for when the submit button is pressed
     document.querySelector('.submit').addEventListener('click', () => {
@@ -103,16 +105,16 @@ pokemonApp.colourRings = () => {
     const canvasElement = document.createElement('canvas');
     canvasElement.classList.add('rings');
     // set the width and height of canvas to match div
-    canvasElement.width = document.querySelector('.leftPanel').children[0].offsetWidth;
-    canvasElement.height = document.querySelector('.leftPanel').children[0].offsetHeight;
+    canvasElement.width = document.querySelector('.leftPanel').querySelector('.imgContainer').offsetWidth;
+    canvasElement.height = document.querySelector('.leftPanel').querySelector('.imgContainer').offsetHeight;
     // console.log(canvasElement.style);
     canvasElement.style.position = "absolute";
-    // Object.assign(canvasElement.style, {
-    //     border: "2px dotted darkgreen",
-    //     // backgroundColor: "rgba(0,255,0,0.2)",
-    //     // backdropFilter: "blur(100px)",
-    //     // backdropFilter: "blur(10px)",
-    // })
+    Object.assign(canvasElement.style, {
+        border: "2px dotted darkgreen",
+        // backgroundColor: "rgba(0,255,0,0.2)",
+        // backdropFilter: "blur(100px)",
+        // backdropFilter: "blur(10px)",
+    })
     // backdropFileter not supported in firefox
     // console.log(CSS.supports("backdropFilter: solid"))
     // console.log(CSS.supports("position, relatve"))
@@ -154,6 +156,21 @@ pokemonApp.randomColour = () => {
     } else  {
         return '#b3a125'
     };
+};
+
+// create a method that will open up a "how to play" tab
+pokemonApp.help = () => {
+    document.querySelector('.fa-question').addEventListener('click', () => {
+        console.log("test");
+        const helpTab = document.createElement('div');
+        helpTab.classList.add('.helpTab')
+        helpTab.innerHTML = `
+            <p>How to play</p>
+            <p>Guess that Pokemon in six tries.</p>
+            <p>After each guess, the number of rings decrease.</p>
+        `;
+        document.querySelector('main').appendChild(helpTab);
+    });
 };
 
 // Call the init method
