@@ -389,6 +389,10 @@ main .wrapper {
   background-color: #ae0000;
 }
 
+.helpTab {
+  background-color: #ffde00;
+}
+
 footer {
   text-align: center;
   position: relative;

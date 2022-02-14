@@ -11,7 +11,10 @@ pokemonApp.init = () => {
     pokemonApp.limit = 151;
     pokemonApp.getPokemon();
     pokemonApp.colourRings();
-    pokemonApp.help();
+    // document.getElementById('help').checked = 'true';
+    console.log(document.getElementById('help').checked);
+    pokemonApp.help(document.getElementById('help').checked);
+    console.log('init check status: ', (document.getElementById('help').checked))
 }
 
 // Create a method which will request information for the API (pokemonApp.getPokemon)
@@ -29,7 +32,7 @@ pokemonApp.getPokemon = () => {
     })
     
     .then (function(jsonResponse) {
-        console.log(jsonResponse);
+        // console.log(jsonResponse);
         pokemonApp.randomPokemon(jsonResponse);
     })
 
@@ -40,13 +43,13 @@ pokemonApp.getPokemon = () => {
 pokemonApp.randomPokemon = (datafromApi) => {
     // creating a variable to choose a random pokemon
     const randomIndex = Math.floor(Math.random() * pokemonApp.limit);
-    console.log(randomIndex);
+    // console.log(randomIndex);
     
     // Calling the array with the random number given to find the pokemon
     const randomPokemonUrl = datafromApi.results[randomIndex].url;
     // const randomPokemonPic = randomPokemonData.sprites.other."official-artwork"."front_default";
     // console.log(randomPokemonPic);
-    console.log(randomPokemonUrl);
+    // console.log(randomPokemonUrl);
     fetch(randomPokemonUrl)
     .then (function(aResponse) {
         return aResponse.json()
@@ -61,10 +64,10 @@ pokemonApp.randomPokemon = (datafromApi) => {
 
 // Build a method that will display the picture of the chosen pokemon and append it (pokemonApp.chosenPokemon)
 pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
-    console.log(dataFromRandomPokemon);
+    // console.log(dataFromRandomPokemon);
     // create variable to hold picture URL given from pokeAPI.co
     const chosenPokemonPicture = dataFromRandomPokemon.sprites.other['official-artwork']['front_default'];
-    console.log(chosenPokemonPicture);
+    // console.log(chosenPokemonPicture);
 
     // look for the img
     const img = document.createElement('img')
@@ -126,7 +129,7 @@ pokemonApp.colourRings = () => {
     // create a circle inside the canvasElement
     const canvas = document.querySelector('.rings');
     const ctx = canvas.getContext('2d');
-    console.log(canvasElement.width)
+    // console.log(canvasElement.width)
 
     
     //create a function to creat 50 ring at a random location
@@ -159,19 +162,39 @@ pokemonApp.randomColour = () => {
 };
 
 // create a method that will open up a "how to play" tab
-pokemonApp.help = () => {
-    document.querySelector('.fa-question').addEventListener('click', () => {
-        console.log("test");
-        const helpTab = document.createElement('div');
-        helpTab.classList.add('.helpTab')
-        helpTab.innerHTML = `
-            <p>How to play</p>
-            <p>Guess that Pokemon in six tries.</p>
-            <p>After each guess, the number of rings decrease.</p>
-        `;
-        document.querySelector('main').appendChild(helpTab);
-    });
+// create a method that returns the helpTab
+pokemonApp.helpTab = () => {
+    helpTabDivElement = document.createElement('div');
+    helpTabDivElement.classList.add('helpTab')
+    helpTabDivElement.id = 'helpTab'
+    helpTabDivElement.innerHTML = `
+        <p>How to play</p>
+        <p>Guess that Pokemon in six tries.</p>
+        <p>After each guess, the number of rings decrease.</p>
+    `;
+    return helpTabDivElement
+}
+
+pokemonApp.help = (status) => {
+    console.log('status ', status);
+    if (status) {
+        //if help is check append
+        console.log("if checked do this");
+        document.querySelector('main').appendChild(pokemonApp.helpTab());
+        // console.log(helpTab);
+    } else if (status == false) {
+        // else remove the helpTab
+        document.querySelector('main').removeChild(document.getElementById('helpTab'))
+    };
 };
+
+
+// event listener for when the ? is clicked 
+document.querySelector('.fa-question').addEventListener('click', () => {
+    console.log("click working status:");
+    console.log(document.getElementById('help').checked);
+    pokemonApp.help(document.getElementById('help').checked);
+});
 
 // Call the init method
 pokemonApp.init();
