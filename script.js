@@ -12,10 +12,8 @@ pokemonApp.init = () => {
     pokemonApp.totalRings = 50;
     pokemonApp.getPokemon();
     pokemonApp.colourRings();
-    // document.getElementById('help').checked = 'true';
-    // console.log('init check status: ', (document.getElementById('help').checked))
     pokemonApp.help(document.getElementById('help').checked);
-    // console.log('init check status: ', (document.getElementById('help').checked))
+    pokemonApp.eventListenerSetUp();
 }
 
 // Create a method which will request information for the API (pokemonApp.getPokemon)
@@ -113,8 +111,8 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
                     numberOfGuesses = numberOfGuesses + 1;
                     // document.querySelector('.rightPanel').querySelector('p').innerText = "That is wrong.  Please try again!";
                     console.log(numberOfGuesses);
+                    // removes 1/5 of the rings from the canvas by clearing the canvas first then redrawing less rings
                     let newTotalRings = pokemonApp.totalRings - pokemonApp.totalRings / 5 * numberOfGuesses
-                    console.log(newTotalRings);
                     pokemonApp.canvas.clearRect(0, 0, 300, 150);
                     for (let i = 0; i < newTotalRings; i++){
                         pokemonApp.drawRing(pokemonApp.ringLocation[i].x, pokemonApp.ringLocation[i].y, pokemonApp.ringLocation[i].color)
@@ -134,50 +132,27 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
 }
 
 
-
-
-
-
-// console.log(document.querySelector('.leftPanel').querySelector('.imgContainer'));
-// console.log(document.querySelector('.leftPanel').querySelector('.imgContainer').offsetWidth);
-
-
 // Build a method that will display pokemon img and name on a pop up upon correct guess (pokemonApp.correctAnswer)
 // Restarts when the user clicks “Play again” (eventListener)
-// Build a method that will blur picture with rings
+
+// Create a method that will blur picture with rings
 pokemonApp.colourRings = () => {
         // Create a canvas that will live on top of imgContainer
         const canvasElement = document.createElement('canvas');
         canvasElement.classList.add('rings');
-        // set the width and height of canvas to match div
-        // canvasElement.width = 350;
-        // canvasElement.height = 350;
-        // canvasElement.width = document.querySelector('.leftPanel').querySelector('.imgContainer').offsetWidth;
-        // canvasElement.height = document.querySelector('.leftPanel').querySelector('.imgContainer').offsetHeight;
-        // console.log(canvasElement.style);
         canvasElement.style.position = "absolute";
-        Object.assign(canvasElement.style, {
-            border: "2px dotted darkgreen",
-            // backgroundColor: "rgba(0,255,0,0.2)",
-            // backdropFilter: "blur(100px)",
-            // backdropFilter: "blur(10px)",
-        })
-        // backdropFileter not supported in firefox
-        // console.log(CSS.supports("backdropFilter: solid"))
-        // console.log(CSS.supports("position, relatve"))
-        // console.log(CSS.supports("text-decoration-style", "blink"))
-        // console.log(CSS.supports("display: flex"))
-        // console.log(CSS.supports("text-decoration-style: blink"))
         document.querySelector('.imgContainer').appendChild(canvasElement);
 
-        
+        // call the to create get 50 ring locations
         pokemonApp.ringLocation();
+
+        // draw the rings on the canva
         for (let i = 0; i < pokemonApp.totalRings; i++){
             pokemonApp.drawRing(pokemonApp.ringLocation[i].x, pokemonApp.ringLocation[i].y, pokemonApp.ringLocation[i].color)
             }
     };
     
-    //create a function to create and store 50 ring at a random location
+    //create a method which create and store 50 ring at a random location
     pokemonApp.ringLocation = () => {
     for (let numberOfRings = 0; numberOfRings < pokemonApp.totalRings; numberOfRings++) {
         let x = Math.floor(Math.random() * 150 + 75);
@@ -191,11 +166,8 @@ pokemonApp.colourRings = () => {
     }
 }
 
-// create a function that will draw the ring
+// create a method that will draw the ring
 pokemonApp.drawRing = (x, y, color) => {
-    // create a circle inside the canvasElement
-    // canvas = document.querySelector('.rings');
-    // console.log(canvasElement.width)
     pokemonApp.canvas = document.querySelector('.rings').getContext('2d');
     let radius = 25;
     
@@ -223,7 +195,7 @@ pokemonApp.randomColour = () => {
 
 
 // create a method that will open up a "how to play" tab
-// create a method that returns the helpTab
+// create a method that creates the helpTab
 pokemonApp.helpTab = () => {
     helpTabDivElement = document.createElement('div');
     helpTabDivElement.classList.add('helpTab')
@@ -236,43 +208,39 @@ pokemonApp.helpTab = () => {
     return helpTabDivElement
 }
 
-// cerat a method that will append or remove the helpTab
+// create a method that will append or remove the helpTab
 pokemonApp.help = () => {
-    // console.log('pokemonApp.help status ', status);
     if (!document.getElementById('helpTab')) {
         //if help is check append
-        // console.log("status true");
         document.querySelector('main').appendChild(pokemonApp.helpTab());
-        // console.log(helpTab);
     } else if (document.getElementById('helpTab')) {
-        // console.log("status false");
         // else remove the helpTab
         document.querySelector('main').removeChild(document.getElementById('helpTab'))
     };
 };
 
-// event listener for when the ? is clicked 
-document.querySelector('.fa-question').addEventListener('click', () => {
-    // console.log("eventlistener status: ", document.getElementById('help').checked);
-    pokemonApp.help();
-    // console.log('--------');
-});
+// create a method which sets up all of the event listeners within this app
+pokemonApp.eventListenerSetUp = () => {
+    // event listener for when the ? is clicked 
+    document.querySelector('.fa-question').addEventListener('click', () => {
+        // console.log("eventlistener status: ", document.getElementById('help').checked);
+        pokemonApp.help();
+        // console.log('--------');
+    });
+    
+    //event listerner to close th helpTab when you click anyhere on the page
+    document.querySelector('html').addEventListener('click', (e) => {
+        //except when you click on the ? again
+        if (e.target === document.querySelector('.fa-question') || e.target === document.getElementById('help')) {
+            return;
+        } else if (document.getElementById('helpTab')) {
+            // else remove the helpTab
+            document.querySelector('main').removeChild(document.getElementById('helpTab'))
+        };
+    })
+    
+}
 
-//event listerner to close th helpTab when you click anyhere on the page
-document.querySelector('html').addEventListener('click', (e) => {
-    // console.log('etarget ', e.target);
-    //except when you click on the ? again
-    if (e.target === document.querySelector('.fa-question') || e.target === document.getElementById('help')) {
-        // console.log('true'); 
-        return;
-    } else if (document.getElementById('helpTab')) {
-        // console.log("status false");
-        // else remove the helpTab
-        document.querySelector('main').removeChild(document.getElementById('helpTab'))
-    };
-})
-
-// create a method that will remove one canvas each time user guesses wrong
 
 // Call the init method
 pokemonApp.init();
