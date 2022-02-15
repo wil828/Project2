@@ -10,6 +10,7 @@ pokemonApp.apiURL = 'https://pokeapi.co/api/v2/pokemon/';
 pokemonApp.init = () => {
     // new variable for amount of pokemon
     pokemonApp.limit = 151;
+    pokemonApp.totalRings = 5;
     pokemonApp.getPokemon();
     pokemonApp.colourRings();
     // document.getElementById('help').checked = 'true';
@@ -113,6 +114,11 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
                     numberOfGuesses = numberOfGuesses + 1;
                     // document.querySelector('.rightPanel').querySelector('p').innerText = "That is wrong.  Please try again!";
                     console.log(numberOfGuesses);
+                    let newTotalRings = pokemonApp.totalRings / 5 * numberOfGuesses
+                    console.log(newTotalRings);
+                    for (let i = 0; i < newTotalRings; i++){
+                        pokemonApp.drawRing(pokemonApp.ringLocation[i].x, pokemonApp.ringLocation[i].y, '(0, 0, 0, 0)')
+                    }
     
                 } else if ( numberOfGuesses === 5) {
                     document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
@@ -132,60 +138,73 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
 
 
 
-console.log(document.querySelector('.leftPanel').querySelector('.imgContainer'));
-console.log(document.querySelector('.leftPanel').querySelector('.imgContainer').offsetWidth);
+// console.log(document.querySelector('.leftPanel').querySelector('.imgContainer'));
+// console.log(document.querySelector('.leftPanel').querySelector('.imgContainer').offsetWidth);
 
 
 // Build a method that will display pokemon img and name on a pop up upon correct guess (pokemonApp.correctAnswer)
 // Restarts when the user clicks “Play again” (eventListener)
 // Build a method that will blur picture with rings
 pokemonApp.colourRings = () => {
-    // Create a canvas that will live on top of imgContainer
-    const canvasElement = document.createElement('canvas');
-    canvasElement.classList.add('rings');
-    // set the width and height of canvas to match div
-    // canvasElement.width = 350;
-    // canvasElement.height = 350;
-    // canvasElement.width = document.querySelector('.leftPanel').querySelector('.imgContainer').offsetWidth;
-    // canvasElement.height = document.querySelector('.leftPanel').querySelector('.imgContainer').offsetHeight;
-    // console.log(canvasElement.style);
-    canvasElement.style.position = "absolute";
-    Object.assign(canvasElement.style, {
-        border: "2px dotted darkgreen",
-        // backgroundColor: "rgba(0,255,0,0.2)",
-        // backdropFilter: "blur(100px)",
-        // backdropFilter: "blur(10px)",
-    })
-    // backdropFileter not supported in firefox
-    // console.log(CSS.supports("backdropFilter: solid"))
-    // console.log(CSS.supports("position, relatve"))
-    // console.log(CSS.supports("text-decoration-style", "blink"))
-    // console.log(CSS.supports("display: flex"))
-    // console.log(CSS.supports("text-decoration-style: blink"))
-    document.querySelector('.imgContainer').appendChild(canvasElement);
+        // Create a canvas that will live on top of imgContainer
+        const canvasElement = document.createElement('canvas');
+        canvasElement.classList.add('rings');
+        // set the width and height of canvas to match div
+        // canvasElement.width = 350;
+        // canvasElement.height = 350;
+        // canvasElement.width = document.querySelector('.leftPanel').querySelector('.imgContainer').offsetWidth;
+        // canvasElement.height = document.querySelector('.leftPanel').querySelector('.imgContainer').offsetHeight;
+        // console.log(canvasElement.style);
+        canvasElement.style.position = "absolute";
+        Object.assign(canvasElement.style, {
+            border: "2px dotted darkgreen",
+            // backgroundColor: "rgba(0,255,0,0.2)",
+            // backdropFilter: "blur(100px)",
+            // backdropFilter: "blur(10px)",
+        })
+        // backdropFileter not supported in firefox
+        // console.log(CSS.supports("backdropFilter: solid"))
+        // console.log(CSS.supports("position, relatve"))
+        // console.log(CSS.supports("text-decoration-style", "blink"))
+        // console.log(CSS.supports("display: flex"))
+        // console.log(CSS.supports("text-decoration-style: blink"))
+        document.querySelector('.imgContainer').appendChild(canvasElement);
 
-    // create a circle inside the canvasElement
-    const canvas = document.querySelector('.rings');
-    const ctx = canvas.getContext('2d');
-    // console.log(canvasElement.width)
-
-    
-    //create a function to creat 50 ring at a random location
-    for (let numberOfRings = 0; numberOfRings < 50; numberOfRings++) {
-        ctx.beginPath();
-        let x = Math.floor(Math.random() * canvasElement.width);
-        let y = Math.floor(Math.random() * canvasElement.height);
-        let radius = 25;
-        let startAngle = 0;
-        let endAngle = 2 * Math.PI;
         
-        ctx.arc(x, y, radius, startAngle, endAngle);
-        ctx.arc(x, y, radius-10, 0, 2 * Math.PI);
-        ctx.fillStyle = pokemonApp.randomColour();
-        ctx.fill("evenodd");
+        pokemonApp.ringLocation();
+        for (let i = 0; i < pokemonApp.totalRings; i++){
+            pokemonApp.drawRing(pokemonApp.ringLocation[i].x, pokemonApp.ringLocation[i].y, pokemonApp.ringLocation[i].color)
+            }
     };
+    
+    //create a function to create and store 50 ring at a random location
+    pokemonApp.ringLocation = () => {
+    for (let numberOfRings = 0; numberOfRings < pokemonApp.totalRings; numberOfRings++) {
+        let x = Math.floor(Math.random() * 150 + 75);
+        let y = Math.floor(Math.random() * 150);
+        let color = pokemonApp.randomColour();
+        pokemonApp.ringLocation[numberOfRings] = {
+            x: x,
+            y: y,
+            color: color,
+        }
+    }
 }
 
+// create a function that will draw the ring
+pokemonApp.drawRing = (x, y, color) => {
+    // create a circle inside the canvasElement
+    const canvas = document.querySelector('.rings');
+    // console.log(canvasElement.width)
+    const ctx = canvas.getContext('2d');
+    let radius = 25;
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+    ctx.arc(x, y, radius-10, 0, 2 * Math.PI);
+    ctx.fillStyle = color;
+    ctx.fill("evenodd");
+
+};
 
 // create a method that randomly returns a colour 
 pokemonApp.randomColour = () => {
@@ -252,6 +271,7 @@ document.querySelector('html').addEventListener('click', (e) => {
     };
 })
 
+// create a method that will remove one canvas each time user guesses wrong
 
 // Call the init method
 pokemonApp.init();
