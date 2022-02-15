@@ -1,4 +1,3 @@
-//test
 // Create app object (pokemonApp)
 const pokemonApp = {};
 
@@ -10,7 +9,7 @@ pokemonApp.apiURL = 'https://pokeapi.co/api/v2/pokemon/';
 pokemonApp.init = () => {
     // new variable for amount of pokemon
     pokemonApp.limit = 151;
-    pokemonApp.totalRings = 5;
+    pokemonApp.totalRings = 50;
     pokemonApp.getPokemon();
     pokemonApp.colourRings();
     // document.getElementById('help').checked = 'true';
@@ -114,10 +113,11 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
                     numberOfGuesses = numberOfGuesses + 1;
                     // document.querySelector('.rightPanel').querySelector('p').innerText = "That is wrong.  Please try again!";
                     console.log(numberOfGuesses);
-                    let newTotalRings = pokemonApp.totalRings / 5 * numberOfGuesses
+                    let newTotalRings = pokemonApp.totalRings - pokemonApp.totalRings / 5 * numberOfGuesses
                     console.log(newTotalRings);
+                    pokemonApp.canvas.clearRect(0, 0, 300, 150);
                     for (let i = 0; i < newTotalRings; i++){
-                        pokemonApp.drawRing(pokemonApp.ringLocation[i].x, pokemonApp.ringLocation[i].y, '(0, 0, 0, 0)')
+                        pokemonApp.drawRing(pokemonApp.ringLocation[i].x, pokemonApp.ringLocation[i].y, pokemonApp.ringLocation[i].color)
                     }
     
                 } else if ( numberOfGuesses === 5) {
@@ -194,15 +194,16 @@ pokemonApp.colourRings = () => {
 // create a function that will draw the ring
 pokemonApp.drawRing = (x, y, color) => {
     // create a circle inside the canvasElement
-    const canvas = document.querySelector('.rings');
+    // canvas = document.querySelector('.rings');
     // console.log(canvasElement.width)
-    const ctx = canvas.getContext('2d');
+    pokemonApp.canvas = document.querySelector('.rings').getContext('2d');
     let radius = 25;
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, 2 * Math.PI);
-    ctx.arc(x, y, radius-10, 0, 2 * Math.PI);
-    ctx.fillStyle = color;
-    ctx.fill("evenodd");
+    
+    pokemonApp.canvas.beginPath();
+    pokemonApp.canvas.arc(x, y, radius, 0, 2 * Math.PI);
+    pokemonApp.canvas.arc(x, y, radius-10, 0, 2 * Math.PI);
+    pokemonApp.canvas.fillStyle = color;
+    pokemonApp.canvas.fill("evenodd");
 
 };
 
