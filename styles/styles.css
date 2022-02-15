@@ -384,6 +384,12 @@ main .wrapper {
   height: 200px;
   background-color: #57b453;
 }
+.rightPanel .textContainer p .greenWord {
+  color: green;
+}
+.rightPanel .textContainer p .yellowWord {
+  color: yellow;
+}
 .rightPanel .inputContainer {
   width: 100%;
 }

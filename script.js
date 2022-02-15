@@ -82,6 +82,23 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
     // adding a variable to keep track of guesses
     let numberOfGuesses = 0;
 
+    // adding a variable to store name of pokemon
+    const pokemonName = dataFromRandomPokemon.name.toLowerCase();
+    console.log(pokemonName);
+
+    // adding an array for the random pokemon chosen
+    const pokemonNameArray = pokemonName.split("");
+
+    // const pokemonNameArray = pokemonName.map((eachLetter) => {
+    //     // return 
+    // });
+    
+
+    // function pokemonLetters (item, index) {
+        
+    // }
+    console.log(pokemonNameArray);
+
     // added an event listener for when the submit button is pressed and increase the amount of guesses
 
         document.querySelector('.submit').addEventListener('click', () => {
@@ -89,21 +106,65 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
             if ( numberOfGuesses < 6) {
                 // tracking the user input of the pokemon name guess
                 const userInput = document.querySelector('#guess');
-
+                console.log(userInput.value.toLowerCase());
+                
+                // creating an array for the user guess
+                const userInputArray = userInput.value.toLowerCase().split("");
+                console.log(userInputArray);
+                console.log(userInputArray.length);
+                let userInputAnswer = "";
+                
+                
+                
                 // creating a variable to display the users guess
                 let userGuessDisplay = document.createElement("p");
-                userGuessDisplay.textContent = `${numberOfGuesses+1}) ${userInput.value.toLowerCase()}`;
+                // userGuessDisplay.textContent = `${numberOfGuesses+1}) ${userInput.value.toLowerCase()}`;
+                // document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
+                
+                for (let i = 0; i < userInputArray.length; i++) {
+                    // console.log(userInputArray[i]);
+                    const check = pokemonName.includes(userInputArray[i]);
+                    // console.log(check);
+                    if (userInputArray[i] === pokemonNameArray[i]){
+                        // console.log('got one Right!');
+                        const greenWord = `${userInputArray[i]}`;
+
+                        const span = document.createElement('span')
+                        span.classList.add('greenWord');
+                        span.innerText = `${userInputArray[i]}`
+                        userGuessDisplay.appendChild(span);
+                        // console.log(span);
+                        // console.log(greenWord);
+                        userInputAnswer = `${userInputAnswer}${greenWord}`; 
+                    } else if (check === true){
+                        // console.log(check);
+                        const yellowWord = userInputArray[i]
+                        const span = document.createElement('span')
+                        span.classList.add('yellowWord');
+                        span.innerText = `${userInputArray[i]}`
+                        userGuessDisplay.appendChild(span);
+                        // console.log(span);
+                        // console.log(yellowWord);
+                        userInputAnswer = `${userInputAnswer}${yellowWord}`;
+                    } else {
+                        userInputAnswer = `${userInputAnswer}${userInputArray[i]}`;
+                        const yellowWord = userInputArray[i]
+                        const span = document.createElement('span')
+                        span.innerText = `${userInputArray[i]}`
+                        userGuessDisplay.appendChild(span);
+                    }
+                } 
+                console.log(userInputAnswer);
+                // console.log(`${userInputArray[1]}${userInputArray[2]}`);
                 document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
 
-                // let userFinalResult = document.createElement("p");
-                // userFinalResult.textContent = 
 
                 // console.log(userInput);
                 // console.log(dataFromRandomPokemon.name);
                 // console.log(userInput.value.toLowerCase());
     
                 if ( dataFromRandomPokemon.name === userInput.value.toLowerCase()) {
-                    document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
+                    // document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
 
                     document.querySelector('.rightPanel').querySelector('p').innerText = "you win!";
                     numberOfGuesses = 6;
@@ -112,10 +173,10 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
                 } else if (numberOfGuesses < 5) {
                     numberOfGuesses = numberOfGuesses + 1;
                     // document.querySelector('.rightPanel').querySelector('p').innerText = "That is wrong.  Please try again!";
-                    console.log(numberOfGuesses);
+                    // console.log(numberOfGuesses);
     
                 } else if ( numberOfGuesses === 5) {
-                    document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
+                    // document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
                     document.querySelector('.rightPanel').querySelector('p').innerText = "You aren't a pokemon master.";
                     numberOfGuesses = numberOfGuesses + 1;
                 }
