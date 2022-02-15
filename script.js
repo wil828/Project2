@@ -80,6 +80,23 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
     // adding a variable to keep track of guesses
     let numberOfGuesses = 0;
 
+    // adding a variable to store name of pokemon
+    const pokemonName = dataFromRandomPokemon.name.toLowerCase();
+    console.log(pokemonName);
+
+    // adding an array for the random pokemon chosen
+    const pokemonNameArray = pokemonName.split("");
+
+    // const pokemonNameArray = pokemonName.map((eachLetter) => {
+    //     // return 
+    // });
+    
+
+    // function pokemonLetters (item, index) {
+        
+    // }
+    // console.log(pokemonNameArray);
+
     // added an event listener for when the submit button is pressed and increase the amount of guesses
 
         document.querySelector('.submit').addEventListener('click', () => {
@@ -87,21 +104,75 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
             if ( numberOfGuesses < 6) {
                 // tracking the user input of the pokemon name guess
                 const userInput = document.querySelector('#guess');
-
+                console.log(userInput.value.toLowerCase());
+                
+                // creating an array for the user guess
+                const userInputArray = userInput.value.toLowerCase().split("");
+                // console.log(userInputArray);
+                // console.log(userInputArray.length);
+                
                 // creating a variable to display the users guess
                 let userGuessDisplay = document.createElement("p");
-                userGuessDisplay.textContent = `${numberOfGuesses+1}) ${userInput.value.toLowerCase()}`;
+
+                // adding a text of 1) , 2) etc.
+                userGuessDisplay.textContent = `${numberOfGuesses + 1}) `;
+
+                // creating a for loop to compare the letters in the user input and pokemon name array and decide if the colour should be green, yellow, or black.
+                for (let i = 0; i < userInputArray.length; i++) {
+                    // console.log(userInputArray[i]);
+                    // create a span element
+                    const span = document.createElement('span');
+
+                    // check variable to check if the letter is included in the string "pokemonName"
+                    const check = pokemonName.includes(userInputArray[i]);
+                    // console.log(check);
+
+                    // check to see if the letter[i] matches with the letter[i] for both arrays.  If so give it a class of greenWord.
+                    if (userInputArray[i] === pokemonNameArray[i]){
+                        // console.log('got one Right!');
+
+                        //give a variable of greenWord to hold the letter
+                        const greenWord = `${userInputArray[i]}`;
+
+                        // add a class of greenWord
+                        span.classList.add('greenWord');
+
+                        // give a value of the innertext
+                        span.innerText = `${userInputArray[i]}`
+
+                        // append child span to the paragraph tag "userGuessDisplay"
+                        userGuessDisplay.appendChild(span);
+                        // console.log(span);
+                        // console.log(greenWord);
+                        
+
+                    // check to see if the check variable is true.  If so, give it a class of yellowWord. 
+                    } else if (check === true){
+                        // console.log(check);
+
+                        const yellowWord = userInputArray[i]
+                        span.classList.add('yellowWord');
+                        span.innerText = `${userInputArray[i]}`
+                        userGuessDisplay.appendChild(span);
+                        // console.log(span);
+                        // console.log(yellowWord);
+
+                    } else {
+                        span.innerText = `${userInputArray[i]}`
+                        userGuessDisplay.appendChild(span);
+                    }
+                } 
+                // console.log(userInputAnswer);
+                // append the userGuessDisplay (p tag) to the rightpanel.
                 document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
 
-                // let userFinalResult = document.createElement("p");
-                // userFinalResult.textContent = 
 
                 // console.log(userInput);
                 // console.log(dataFromRandomPokemon.name);
                 // console.log(userInput.value.toLowerCase());
     
                 if ( dataFromRandomPokemon.name === userInput.value.toLowerCase()) {
-                    document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
+                    // document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
 
                     document.querySelector('.rightPanel').querySelector('p').innerText = "you win!";
                     numberOfGuesses = 6;
@@ -110,7 +181,7 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
                 } else if (numberOfGuesses < 5) {
                     numberOfGuesses = numberOfGuesses + 1;
                     // document.querySelector('.rightPanel').querySelector('p').innerText = "That is wrong.  Please try again!";
-                    console.log(numberOfGuesses);
+
                     // removes 1/5 of the rings from the canvas by clearing the canvas first then redrawing less rings
                     let newTotalRings = pokemonApp.totalRings - pokemonApp.totalRings / 5 * numberOfGuesses
                     pokemonApp.canvas.clearRect(0, 0, 300, 150);
@@ -119,7 +190,7 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
                     }
     
                 } else if ( numberOfGuesses === 5) {
-                    document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
+                    // document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
                     document.querySelector('.rightPanel').querySelector('p').innerText = "You aren't a pokemon master.";
                     numberOfGuesses = numberOfGuesses + 1;
                 }
