@@ -97,7 +97,7 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
     // function pokemonLetters (item, index) {
         
     // }
-    console.log(pokemonNameArray);
+    // console.log(pokemonNameArray);
 
     // added an event listener for when the submit button is pressed and increase the amount of guesses
 
@@ -110,52 +110,62 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
                 
                 // creating an array for the user guess
                 const userInputArray = userInput.value.toLowerCase().split("");
-                console.log(userInputArray);
-                console.log(userInputArray.length);
-                let userInputAnswer = "";
-                
-                
+                // console.log(userInputArray);
+                // console.log(userInputArray.length);
                 
                 // creating a variable to display the users guess
                 let userGuessDisplay = document.createElement("p");
-                // userGuessDisplay.textContent = `${numberOfGuesses+1}) ${userInput.value.toLowerCase()}`;
-                // document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
-                
+
+                // adding a text of 1) , 2) etc.
+                userGuessDisplay.textContent = `${numberOfGuesses + 1}) `;
+
+                // creating a for loop to compare the letters in the user input and pokemon name array and decide if the colour should be green, yellow, or black.
                 for (let i = 0; i < userInputArray.length; i++) {
                     // console.log(userInputArray[i]);
+                    // create a span element
+                    const span = document.createElement('span');
+
+                    // check variable to check if the letter is included in the string "pokemonName"
                     const check = pokemonName.includes(userInputArray[i]);
                     // console.log(check);
+
+                    // check to see if the letter[i] matches with the letter[i] for both arrays.  If so give it a class of greenWord.
                     if (userInputArray[i] === pokemonNameArray[i]){
                         // console.log('got one Right!');
+
+                        //give a variable of greenWord to hold the letter
                         const greenWord = `${userInputArray[i]}`;
 
-                        const span = document.createElement('span')
+                        // add a class of greenWord
                         span.classList.add('greenWord');
+
+                        // give a value of the innertext
                         span.innerText = `${userInputArray[i]}`
+
+                        // append child span to the paragraph tag "userGuessDisplay"
                         userGuessDisplay.appendChild(span);
                         // console.log(span);
                         // console.log(greenWord);
-                        userInputAnswer = `${userInputAnswer}${greenWord}`; 
+                        
+
+                    // check to see if the check variable is true.  If so, give it a class of yellowWord. 
                     } else if (check === true){
                         // console.log(check);
+
                         const yellowWord = userInputArray[i]
-                        const span = document.createElement('span')
                         span.classList.add('yellowWord');
                         span.innerText = `${userInputArray[i]}`
                         userGuessDisplay.appendChild(span);
                         // console.log(span);
                         // console.log(yellowWord);
-                        userInputAnswer = `${userInputAnswer}${yellowWord}`;
+
                     } else {
-                        userInputAnswer = `${userInputAnswer}${userInputArray[i]}`;
-                        const yellowWord = userInputArray[i]
-                        const span = document.createElement('span')
                         span.innerText = `${userInputArray[i]}`
                         userGuessDisplay.appendChild(span);
                     }
                 } 
-                console.log(userInputAnswer);
-                // console.log(`${userInputArray[1]}${userInputArray[2]}`);
+                // console.log(userInputAnswer);
+                // append the userGuessDisplay (p tag) to the rightpanel.
                 document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
 
 
