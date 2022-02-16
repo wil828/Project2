@@ -11,6 +11,7 @@ pokemonApp.init = () => {
     pokemonApp.limit = 151;
     pokemonApp.totalRings = 50;
     pokemonApp.getPokemon();
+    pokemonApp.getPokemon();
     pokemonApp.colourRings();
     pokemonApp.help(document.getElementById('help').checked);
     pokemonApp.eventListenerSetUp();
@@ -72,9 +73,10 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
     const img = document.createElement('img')
 
     img.src = chosenPokemonPicture;
-    // img.style.filter = 'blur(8px)';
-    // console.log(img);
-    document.querySelector('.leftPanel').children[0].appendChild(img);
+
+    console.log(document.querySelector('.leftPanel img').src)
+    document.querySelector('.leftPanel img').src = chosenPokemonPicture
+    // document.querySelector('.leftPanel').children[0].appendChild(img);
     // Build a method that will compare user input to displayed pokemon and append user input to list (pokemonApp.checkAnswer)
 
     // adding a variable to keep track of guesses
@@ -210,8 +212,6 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
 pokemonApp.colourRings = () => {
         // Create a canvas that will live on top of imgContainer
         const canvasElement = document.createElement('canvas');
-        canvasElement.classList.add('rings');
-        canvasElement.style.position = "absolute";
         document.querySelector('.imgContainer').appendChild(canvasElement);
 
         // call the to create get 50 ring locations
@@ -239,7 +239,7 @@ pokemonApp.colourRings = () => {
 
 // create a method that will draw the ring
 pokemonApp.drawRing = (x, y, color) => {
-    pokemonApp.canvas = document.querySelector('.rings').getContext('2d');
+    pokemonApp.canvas = document.querySelector('canvas').getContext('2d');
     let radius = 25;
     
     pokemonApp.canvas.beginPath();
@@ -311,6 +311,14 @@ pokemonApp.eventListenerSetUp = () => {
     })
     
 }
+
+//create a method that holds a play again feature
+pokemonApp.playAgain = () => {
+    pokemonApp.getPokemon()
+}
+
+document.querySelector('#playAgain').addEventListener('click', () => {pokemonApp.playAgain()});
+//create a method that will display the chosen pokemon's picture and name upon 
 
 
 // Call the init method

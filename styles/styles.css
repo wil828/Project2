@@ -365,6 +365,8 @@ main .wrapper {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  position: absolute;
+  top: 0;
 }
 
 .rightPanel {
