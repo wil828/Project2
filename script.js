@@ -33,31 +33,34 @@ pokemonApp.getPokemon = () => {
     .then (function(jsonResponse) {
         // console.log(jsonResponse);
         pokemonApp.randomPokemon(jsonResponse);
+        pokemonApp.tallyName(jsonResponse);
 
-        // // check for names that does not ONLY include regular letters
-        // console.log(jsonResponse.results);
-        // jsonResponse.results.forEach( (pokemon) => {
-        //     if (!/^[a-zA-Z]+$/.test(pokemon.name)) {
-        //         console.log(pokemon.name);
-        //     }
-        // }) 
+    })
+    
+};
 
-        
-        let longestName = ""
-        jsonResponse.results.forEach( (pokemon) => {
-            if (pokemon.name.length > longestName.length) {
-                longestName = pokemon.name;
-            }
-        }) 
-        console.log(`${longestName} is the longest character name with ${longestName.length}`);
-        
-        let numOfPokemon = 0;
-        let charLength = 0;
-        let numOfCharLength = {};
-        for (let index = 1; index <= longestName.length; index++) {
-            numOfCharLength[index] = 0;
-        };
-        jsonResponse.results.forEach( (pokemon) => {
+// create a method that will tally the pokemon name length 
+pokemonApp.tallyName = (pokemonObject) => {
+    let longestName = ""
+    pokemonObject.results.forEach( (pokemon) => {
+        if (pokemon.name.length > longestName.length) {
+            longestName = pokemon.name;
+        }
+    }) 
+    console.log(`${longestName} is the longest character name with ${longestName.length}`);
+    
+    let numOfPokemon = 0;
+    let charLength = 0;
+    pokemonApp.numOfCharLength = {};
+    // initial setting numOfCharLength to 0
+    for (let index = 0; index <= longestName.length; index++) {
+        pokemonApp.numOfCharLength[index] = 0;
+    };
+
+    pokemonObject.results.forEach( (pokemon) => {
+        // only get pokemon that contains letters
+        if (/^[a-zA-Z]+$/.test(pokemon.name)) {
+            // console.log(pokemon.name);
             while (charLength <= longestName.length) {
                 // console.log(charLength);
                 // console.log(longestName.length);
@@ -65,17 +68,18 @@ pokemonApp.getPokemon = () => {
                     // console.log(pokemon.name.length);
                     numOfPokemon++;
                     console.log(numOfPokemon, pokemon.name, pokemon.name.length);
-                    numOfCharLength[charLength] = numOfCharLength[charLength] + 1;
+                    pokemonApp.numOfCharLength[charLength] = pokemonApp.numOfCharLength[charLength] + 1;
                 }
-
                 charLength++;
             }
             charLength = 0;
-        }) 
-        console.log(numOfCharLength);
-    })
-
-};
+        }
+        // total number of pokemons
+        pokemonApp.numOfCharLength[0] = numOfPokemon;
+    }) 
+    console.log(pokemonApp.numOfCharLength);
+    
+}
 
 // Build a method that will grab the URL of the random pokemon (pokemonApp.randomPokemon)
 pokemonApp.randomPokemon = (datafromApi) => {
