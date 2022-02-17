@@ -13,10 +13,8 @@ pokemonApp.init = () => {
     pokemonApp.getPokemon();
     pokemonApp.colourRings();
     pokemonApp.help(document.getElementById('help').checked);
-    pokemonApp.displayScoreboard();
     pokemonApp.eventListenerSetUp();
     
-
 }
 
 // Create a method which will request information for the API (pokemonApp.getPokemon)
@@ -314,6 +312,7 @@ pokemonApp.stats = {
 // console.log(pokemonApp.stats['tries1']);
 // console.log(pokemonApp.stats.totalStats());
 
+// create a method to increase the amount of tries and total guesses and correct
 pokemonApp.scoreboard = (guessNumber) => {
     pokemonApp.stats[`tries${guessNumber}`]++
     console.log(pokemonApp.stats);
@@ -325,7 +324,7 @@ pokemonApp.scoreboardDisplay = () => {
     scoreboardDisplayDivElement.classList.add('scoreboardDisplay')
     scoreboardDisplayDivElement.id = 'scoreboardDisplay'
     scoreboardDisplayDivElement.innerHTML = `
-        <h2>Scoreboard!</h2>
+        <h3>Scoreboard!</h3>
         <p>So far you have guessed the Pokemon in these amount of times:</p>
         <ul>
             <li>1 Try: ${pokemonApp.stats.tries1} </li>
@@ -341,22 +340,20 @@ pokemonApp.scoreboardDisplay = () => {
     return scoreboardDisplayDivElement
 }
 
-document.querySelector('#stat').checked = true;
+
 // create a method to display the scoreboard
 pokemonApp.displayScoreboard = (i) => {
     
-    if (document.querySelector('#stat').checked === false) {
-        console.log('display!');
-        //if the stat icon is check append
-        document.querySelector('main').append(pokemonApp.scoreboardDisplay());
-
-    } else if ((document.getElementById('stat').checked === true) && (i > 0)) {
-        console.log('take me AWAY!');
+    if ((document.querySelector('#scoreboardDisplay')) && (i>0)) {
+        // console.log('take me AWAY!');
         const divId = document.querySelector('main').querySelector('#scoreboardDisplay');
-        console.log(divId);
-        // else remove the helpTab
-        console.log(document.querySelector('main'));
+
+        // if the scoreboardDisplay ID is there remove the child
         document.querySelector('main').removeChild(divId);
+
+    } else if (!document.querySelector('#scoreboardDisplay') && (i >= 0)){
+        // if the scoreboardDisplay ID is not there, append it!
+        document.querySelector('main').append(pokemonApp.scoreboardDisplay());
     };
 };
 
@@ -377,6 +374,7 @@ pokemonApp.eventListenerSetUp = () => {
         // console.log('STATISTICS RULE!');
         
         pokemonApp.displayScoreboard(i);
+        // added a variable of i so that the scoreboard won't display first time when refreshing.
         i = i + 1;
     })
     
