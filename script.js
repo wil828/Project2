@@ -41,30 +41,58 @@ pokemonApp.getPokemon = () => {
         //         console.log(pokemon.name);
         //     }
         // }) 
+
         
+        let longestName = ""
+        jsonResponse.results.forEach( (pokemon) => {
+            if (pokemon.name.length > longestName.length) {
+                longestName = pokemon.name;
+            }
+        }) 
+        console.log(`${longestName} is the longest character name with ${longestName.length}`);
+        
+        let numOfPokemon = 0;
+        let charLength = 0;
+        let numOfCharLength = {};
+        for (let index = 1; index <= longestName.length; index++) {
+            numOfCharLength[index] = 0;
+        };
+        jsonResponse.results.forEach( (pokemon) => {
+            while (charLength <= longestName.length) {
+                // console.log(charLength);
+                // console.log(longestName.length);
+                if (pokemon.name.length == charLength) {
+                    // console.log(pokemon.name.length);
+                    numOfPokemon++;
+                    console.log(numOfPokemon, pokemon.name, pokemon.name.length);
+                    numOfCharLength[charLength] = numOfCharLength[charLength] + 1;
+                }
+
+                charLength++;
+            }
+            charLength = 0;
+        }) 
+        console.log(numOfCharLength);
     })
 
 };
 
 // Build a method that will grab the URL of the random pokemon (pokemonApp.randomPokemon)
-
 pokemonApp.randomPokemon = (datafromApi) => {
-    // creating a variable to choose a random pokemon
-    const randomIndex = Math.floor(Math.random() * pokemonApp.limit);
-    // console.log(randomIndex);
-    
-    // Calling the array with the random number given to find the pokemon
-    const randomPokemonUrl = datafromApi.results[randomIndex].url;
-    // const randomPokemonPic = randomPokemonData.sprites.other."official-artwork"."front_default";
-    // console.log(randomPokemonPic);
-    // console.log(randomPokemonUrl);
+    // do while loop to only choose pokemons that contains only letters
+    do {
+        // creating a variable to choose a random pokemon
+        randomIndex = Math.floor(Math.random() * pokemonApp.limit);
+
+        // Calling the array with the random number given to find the pokemon
+        randomPokemonUrl = datafromApi.results[randomIndex].url;}
+    while (!/^[a-zA-Z]+$/.test(datafromApi.results[randomIndex].name) == true);
+
     fetch(randomPokemonUrl)
     .then (function(aResponse) {
         return aResponse.json()
     })
-    
     .then (function(jResponse) {
-        // console.log(jResponse);
         pokemonApp.chosenPokemon(jResponse);
         
     })
@@ -75,9 +103,9 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
     // console.log(dataFromRandomPokemon);
     // create variable to hold picture URL given from pokeAPI.co
     pokemonApp.chosenPokemonPicture = dataFromRandomPokemon.sprites.other['official-artwork']['front_default'];
-    console.log(dataFromRandomPokemon.name);
+
     pokemonApp.chosenPokemonName = dataFromRandomPokemon.name;
-    console.log(pokemonApp.chosenPokemonPicture);
+
 
     // look for the img
     // const img = document.createElement('img')
