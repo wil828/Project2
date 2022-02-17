@@ -5,6 +5,14 @@ h1 {
     font-size: 1rem;
 }
 
+h2 {
+    font-family: $mainFont;
+    font-size: 4rem;
+    color: #3b4cca;
+    text-shadow: 5px 5px 0px #ffde00, -5px 5px 0px #ffde00, -5px -5px 0px #ffde00, 5px -5px 0px #ffde00, 5px -5px 0px #ffde00;
+    text-transform: uppercase;
+}
+
 p {
     font-family: $mainFont;
 }
