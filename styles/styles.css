@@ -428,16 +428,6 @@ main .wrapper {
   padding: 50px;
 }
 
-
-.scoreboardDisplay {
-  background-color: #ffde00;
-  position: fixed;
-  top: 30%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  padding: 50px;
-
 .answerTab {
   background-image: url(../assets/answerTabBG.jpg);
   background-repeat: no-repeat;
@@ -470,6 +460,16 @@ main .wrapper {
           justify-content: space-evenly;
   width: 55%;
   text-align: center;
+}
+
+.scoreboardDisplay {
+  background-color: #ffde00;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  padding: 50px;
 }
 
 footer {

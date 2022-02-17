@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,13 +9,15 @@
     <link rel="stylesheet" href="styles/styles.css">
     <title>PokemonxWordle</title>
 </head>
+
 <body>
     <header>
         <!-- START .wrapper START -->
         <div class="wrapper flexContainer">
             <!-- help and scoreboard if time permits -->
-            <div class="extra">
-                <label for="help"><i class="fas fa-solid fa-question"></i></label>
+            <label for="help"><i class="fas fa-solid fa-question"></i></label>
+            <input type="checkbox" name="help" id="help" checked>
+            <!-- <div class="extra">
                 <form class="options">
                     <label for="nameLength">length: </label>
                     <select id="nameLength" name="nameLength">
@@ -24,50 +27,18 @@
                         <option value="6">6</option>
                     </select>
                 </form>
-            </div>
-            <input type="checkbox" name="help" id="help" checked>
+            </div> -->
             <h1>PokemonxWordle</h1>
-            <input type="checkbox" name="stat" id="stat" checked>
-            <label for="stat"><i class="fas fa-solid fa-chart-line"></i></label>
+            <i class="fas fa-solid fa-chart-line"></i>
         </div><!-- END .wrapper END -->
     </header>
 
     <main class="indexMain" id="indexMain">
         <!-- START .wrapper START -->
         <div class="wrapper flexContainer">
-
-                <div class="banner" id="banner">
-                    <img src="./assets/Pokemon-Logo.png" alt="Pokemon logo">
-                </div>
-                <!-- START .leftPanel START -->
-                <section class="leftPanel flexContainer" id="leftPanel">
-                    <!-- START imgContainer START -->
-                    <div class="imgContainer">
-                        <!-- chosen pokemon will be displayed here -->
-                        <img>
-                    </div><!-- END .imgContainer END -->
-                </section><!-- END .leftPanel END -->
-                <section class="spine" id="spine"></section>
-                <!-- START .rightPanel START -->
-                <section class="rightPanel flexContainer" id="rightPanel">
-                    <!-- START .textContainer START -->
-                    <div class="textContainer">
-                        <p></p>
-                        <!-- currently a place to display you win / you lose will replace with wordle if time permits -->
-                    </div><!-- END .textContainer END -->
-                    <!-- START .inputContainer START -->
-                    <div class="inputContainer flexContainer">
-                        <label for="guess" class="sr-only">Guess your Pokemon</label>
-                        <input type="text" id="guess" placeholder="Guess your Pokemon">
-                        <button class="submit" type="submit"><img src="./assets/pokeball.png" alt=""></button>
-                    </div><!-- END .inputContainer END -->
-                </section><!-- END .rightPanel END -->
-
-
             <div class="banner" id="banner">
                 <img src="./assets/Pokemon-Logo.png" alt="Pokemon logo">
             </div>
-
             <!-- START .leftPanel START -->
             <section class="leftPanel flexContainer" id="leftPanel">
                 <!-- START imgContainer START -->
@@ -76,18 +47,14 @@
                     <img>
                 </div><!-- END .imgContainer END -->
             </section><!-- END .leftPanel END -->
-
             <section class="spine" id="spine"></section>
-
             <!-- START .rightPanel START -->
             <section class="rightPanel flexContainer" id="rightPanel">
-
                 <!-- START .textContainer START -->
                 <div class="textContainer">
                     <p></p>
                     <!-- currently a place to display you win / you lose will replace with wordle if time permits -->
                 </div><!-- END .textContainer END -->
-
                 <!-- START .inputContainer START -->
                 <form class="inputContainer flexContainer">
                     <label for="guess" class="sr-only">Guess your Pokemon</label>
@@ -95,11 +62,7 @@
                     <button class="submit" type="submit"><img src="./assets/pokeball.png" alt=""></button>
                 </form><!-- END .inputContainer END -->
             </section><!-- END .rightPanel END -->
-
         </div><!-- END .wrapper END -->
-
-        <p id="playAgain">play again</p>
-
 
     </main>
     <footer>
@@ -111,4 +74,5 @@
     </footer>
     <script src="script.js"></script>
 </body>
+
 </html>
