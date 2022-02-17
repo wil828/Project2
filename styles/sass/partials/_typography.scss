@@ -9,7 +9,8 @@ h2 {
     font-family: $mainFont;
     font-size: 4rem;
     color: #3b4cca;
-    text-shadow: 5px 5px 0px #ffde00, -5px 5px 0px #ffde00, -5px -5px 0px #ffde00, 5px -5px 0px #ffde00, 5px -5px 0px #ffde00;
+    // text-shadow: 5px 5px 0px #ffde00, -5px 5px 0px #ffde00, -5px -5px 0px #ffde00, 5px -5px 0px #ffde00, 5px -5px 0px #ffde00, 0px 0px 20px #ffde00;
+    text-shadow: 2px 2px 0 #ffde00, 2px -2px 0 #ffde00, -2px 2px 0 #ffde00, -2px -2px 0 #ffde00, 2px 0px 0 #ffde00, 0px 2px 0 #ffde00, -2px 0px 0 #ffde00, 0px -2px 0 #ffde00, 4px 5px 0px rgba(255,222,0,0);
     text-transform: uppercase;
 }
 
