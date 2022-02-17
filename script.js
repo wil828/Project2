@@ -12,7 +12,7 @@ pokemonApp.init = () => {
     pokemonApp.totalRings = 50;
     pokemonApp.getPokemon();
     pokemonApp.randomPokemon();
-    pokemonApp.help(document.getElementById('help').checked);
+    pokemonApp.help();
     pokemonApp.eventListenerSetUp();
 
 }
@@ -32,8 +32,9 @@ pokemonApp.getPokemon = () => {
     })
     
     .then (function(jsonResponse) {
-        // console.log(jsonResponse);
+        console.log(jsonResponse);
         // pokemonApp.randomPokemon(jsonResponse);
+        console.log(jsonResponse);
         pokemonApp.tallyName(jsonResponse);
 
     })
@@ -83,34 +84,38 @@ pokemonApp.tallyName = (pokemonObject) => {
 }
 // Build a method that will grab the URL of the random pokemon (pokemonApp.randomPokemon)
 pokemonApp.randomPokemon = () => {
-    pokemonApp.colourRings();
     let pokeInfo = "";
-    let pokeNameLength = 0;
-
+    // let pokeNameLength = 0;
+    
     // do while loop to only choose pokemons that contains only letters
     // do {
-        // creating a variable to choose a random pokemon
-        randomIndex = Math.floor(Math.random() * pokemonApp.limit + 1);
-        
-        // Calling the array with the random number given to find the pokemon
-        pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${randomIndex}`
-        // randomPokemonUrl = datafromApi.results[randomIndex].url;//}
+    // creating a variable to choose a random pokemon
+    randomIndex = Math.floor(Math.random() * pokemonApp.limit + 1);
+    
+    // Calling the array with the random number given to find the pokemon
+    pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${randomIndex}`
+    // randomPokemonUrl = datafromApi.results[randomIndex].url;//}
     // while (!/^[a-zA-Z]+$/.test(datafromApi.results[randomIndex].name) == true);
+    
+    fetch(pokemonUrl)
+    .then (function(aResponse) {
+        return aResponse.json()
+    })
+    .then (function(jResponse) {
+        pokemonApp.chosenPokemon(jResponse);
+        console.log(jResponse.forms[0]);
+        pokeName = jResponse.forms[0];
         
-        fetch(pokemonUrl)
-        .then (function(aResponse) {
-            return aResponse.json()
-        })
-        .then (function(jResponse) {
-            pokemonApp.chosenPokemon(jResponse);
-            console.log(jResponse.forms[0]);
-            pokeName = jResponse.forms[0];
-
-            // console.log(jResponse.forms[0].name.length)
-            // pokeNameLength = jResponse.forms[0].name.length;
-        })
-// } while (!/^[a-zA-Z]+$/.test(pokeName))
-console.log(pokeInfo);
+        // console.log(jResponse.forms[0].name.length)
+        // pokeNameLength = jResponse.forms[0].name.length;
+        // console.log(/^[a-zA-Z]+$/.test(jResponse.forms[0].name));
+        if (!/^[a-zA-Z]+$/.test(jResponse.forms[0].name)) {
+            pokemonApp.randomPokemon();
+        }
+    })
+    // } while (!/^[a-zA-Z]+$/.test(pokeName))
+    console.log(pokeInfo);
+    pokemonApp.colourRings();
 }
 
 // Build a method that will display the picture of the chosen pokemon and append it (pokemonApp.chosenPokemon)
