@@ -11,15 +11,14 @@ pokemonApp.init = () => {
     pokemonApp.limit = 151;
     pokemonApp.totalRings = 50;
     pokemonApp.getPokemon();
-    pokemonApp.getPokemon();
-    pokemonApp.colourRings();
     pokemonApp.help(document.getElementById('help').checked);
     pokemonApp.eventListenerSetUp();
+
 }
 
 // Create a method which will request information for the API (pokemonApp.getPokemon)
 pokemonApp.getPokemon = () => {
-
+    pokemonApp.colourRings()
     const url = new URL(pokemonApp.apiURL);
     url.search = new URLSearchParams({
         limit : pokemonApp.limit,
@@ -34,6 +33,15 @@ pokemonApp.getPokemon = () => {
     .then (function(jsonResponse) {
         // console.log(jsonResponse);
         pokemonApp.randomPokemon(jsonResponse);
+
+        // // check for names that does not ONLY include regular letters
+        // console.log(jsonResponse.results);
+        // jsonResponse.results.forEach( (pokemon) => {
+        //     if (!/^[a-zA-Z]+$/.test(pokemon.name)) {
+        //         console.log(pokemon.name);
+        //     }
+        // }) 
+        
     })
 
 };
@@ -66,16 +74,18 @@ pokemonApp.randomPokemon = (datafromApi) => {
 pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
     // console.log(dataFromRandomPokemon);
     // create variable to hold picture URL given from pokeAPI.co
-    const chosenPokemonPicture = dataFromRandomPokemon.sprites.other['official-artwork']['front_default'];
-    // console.log(chosenPokemonPicture);
+    pokemonApp.chosenPokemonPicture = dataFromRandomPokemon.sprites.other['official-artwork']['front_default'];
+    console.log(dataFromRandomPokemon.name);
+    pokemonApp.chosenPokemonName = dataFromRandomPokemon.name;
+    console.log(pokemonApp.chosenPokemonPicture);
 
     // look for the img
-    const img = document.createElement('img')
+    // const img = document.createElement('img')
 
-    img.src = chosenPokemonPicture;
+    // img.src = chosenPokemonPicture;
 
-    console.log(document.querySelector('.leftPanel img').src)
-    document.querySelector('.leftPanel img').src = chosenPokemonPicture
+    // console.log(document.querySelector('.leftPanel img').src)
+    document.querySelector('.leftPanel img').src = pokemonApp.chosenPokemonPicture
     // document.querySelector('.leftPanel').children[0].appendChild(img);
     // Build a method that will compare user input to displayed pokemon and append user input to list (pokemonApp.checkAnswer)
 
@@ -84,7 +94,7 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
 
     // adding a variable to store name of pokemon
     const pokemonName = dataFromRandomPokemon.name.toLowerCase();
-    console.log(pokemonName);
+    // console.log(pokemonName);
 
     // adding an array for the random pokemon chosen
     const pokemonNameArray = pokemonName.split("");
@@ -178,7 +188,7 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
 
                     document.querySelector('.rightPanel').querySelector('p').innerText = "you win!";
                     numberOfGuesses = 6;
-
+                    pokemonApp.answerTab();
     
                 } else if (numberOfGuesses < 5) {
                     numberOfGuesses = numberOfGuesses + 1;
@@ -195,13 +205,14 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
                     // document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
                     document.querySelector('.rightPanel').querySelector('p').innerText = "You aren't a pokemon master.";
                     numberOfGuesses = numberOfGuesses + 1;
+                    pokemonApp.answerTab();
                 }
 
             }
 
 
         });
-
+    
 }
 
 
@@ -214,6 +225,7 @@ pokemonApp.colourRings = () => {
         const canvasElement = document.createElement('canvas');
         document.querySelector('.imgContainer').appendChild(canvasElement);
 
+
         // call the to create get 50 ring locations
         pokemonApp.ringLocation();
 
@@ -223,8 +235,8 @@ pokemonApp.colourRings = () => {
             }
     };
     
-    //create a method which create and store 50 ring at a random location
-    pokemonApp.ringLocation = () => {
+//create a method which create and store 50 ring at a random location
+pokemonApp.ringLocation = () => {
     for (let numberOfRings = 0; numberOfRings < pokemonApp.totalRings; numberOfRings++) {
         let x = Math.floor(Math.random() * 150 + 75);
         let y = Math.floor(Math.random() * 150);
@@ -270,7 +282,7 @@ pokemonApp.randomColour = () => {
 pokemonApp.helpTab = () => {
     helpTabDivElement = document.createElement('div');
     helpTabDivElement.classList.add('helpTab')
-    helpTabDivElement.id = 'helpTab'
+    // helpTabDivElement.id = 'helpTab'
     helpTabDivElement.innerHTML = `
         <p>How to play</p>
         <p>Guess that Pokemon in six tries.</p>
@@ -281,12 +293,12 @@ pokemonApp.helpTab = () => {
 
 // create a method that will append or remove the helpTab
 pokemonApp.help = () => {
-    if (!document.getElementById('helpTab')) {
+    if (!document.querySelector('.helpTab')) {
         //if help is check append
         document.querySelector('main').appendChild(pokemonApp.helpTab());
-    } else if (document.getElementById('helpTab')) {
+    } else if (document.querySelector('.helpTab')) {
         // else remove the helpTab
-        document.querySelector('main').removeChild(document.getElementById('helpTab'))
+        document.querySelector('main').removeChild(document.querySelector('.helpTab'))
     };
 };
 
@@ -304,22 +316,72 @@ pokemonApp.eventListenerSetUp = () => {
         //except when you click on the ? again
         if (e.target === document.querySelector('.fa-question') || e.target === document.getElementById('help')) {
             return;
-        } else if (document.getElementById('helpTab')) {
+        } else if (document.querySelector('.helpTab')) {
             // else remove the helpTab
-            document.querySelector('main').removeChild(document.getElementById('helpTab'))
+            document.querySelector('main').removeChild(document.querySelector('.helpTab'))
         };
     })
-    
-}
+
+    // event listener when play again is clicked
+    document.querySelector('main').addEventListener('click', (e) => {
+        if (e.target.className === "playAgain") {
+            document.querySelector('main div').removeChild(document.querySelector('.answerTab'));
+        pokemonApp.playAgain();
+        }
+    });
+};
 
 //create a method that holds a play again feature
 pokemonApp.playAgain = () => {
-    pokemonApp.getPokemon()
-}
+    // clear canvas
+    pokemonApp.canvas.clearRect(0, 0, 300, 150);
+    pokemonApp.getPokemon();
+};
 
-document.querySelector('#playAgain').addEventListener('click', () => {pokemonApp.playAgain()});
+
 //create a method that will display the chosen pokemon's picture and name upon 
+pokemonApp.answerTab = () => {
 
+    const sectionElement = document.createElement('section');
+    sectionElement.classList.add('answerTab', 'flexContainer');
+
+    // clear the section
+    if (document.querySelector('.answerTab')) {
+        
+    }
+
+    // create div to hold the pokemon img
+    const imgDiv = document.createElement('div');
+    imgDiv.classList.add('imgContainer')
+    const imgElement = document.createElement('img');
+    console.log(pokemonApp.chosenPokemonPicture);
+    imgElement.src = pokemonApp.chosenPokemonPicture;
+
+    // append to section
+    sectionElement.appendChild(imgDiv).appendChild(imgElement);
+
+    // create div to hold the pokemon name
+    const textDiv = document.createElement('div');
+    textDiv.classList.add('textContainer', 'flexContainer');
+    const textElement = document.createElement('h2');
+    textElement.textContent = pokemonApp.chosenPokemonName;
+
+    // create a button for play again
+    const buttonElement = document.createElement('button')
+    buttonElement.classList.add('playAgain');
+    buttonElement.id = 'playAgain';
+    console.log(buttonElement);
+    console.log(document.querySelector('main button'));
+    
+    buttonElement.textContent = "Play again";
+    
+
+    // append to section
+    sectionElement.appendChild(textDiv).append(textElement, buttonElement);
+
+    //append sectin to main
+    document.querySelector('main .wrapper').append(sectionElement);
+};
 
 // Call the init method
 pokemonApp.init();
