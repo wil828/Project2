@@ -11,13 +11,14 @@ pokemonApp.init = () => {
     pokemonApp.limit = 151;
     pokemonApp.totalRings = 50;
     pokemonApp.getPokemon();
-    pokemonApp.help(document.getElementById('help').checked);
+    pokemonApp.randomPokemon();
+    pokemonApp.help();
     pokemonApp.eventListenerSetUp();
 }
 
 // Create a method which will request information for the API (pokemonApp.getPokemon)
 pokemonApp.getPokemon = () => {
-    pokemonApp.colourRings()
+    // pokemonApp.colourRings()
     const url = new URL(pokemonApp.apiURL);
     url.search = new URLSearchParams({
         limit : pokemonApp.limit,
@@ -30,43 +31,90 @@ pokemonApp.getPokemon = () => {
     })
     
     .then (function(jsonResponse) {
-        // console.log(jsonResponse);
-        pokemonApp.randomPokemon(jsonResponse);
+        console.log(jsonResponse);
+        // pokemonApp.randomPokemon(jsonResponse);
+        console.log(jsonResponse);
+        pokemonApp.tallyName(jsonResponse);
 
-        // // check for names that does not ONLY include regular letters
-        // console.log(jsonResponse.results);
-        // jsonResponse.results.forEach( (pokemon) => {
-        //     if (!/^[a-zA-Z]+$/.test(pokemon.name)) {
-        //         console.log(pokemon.name);
-        //     }
-        // }) 
-        
     })
-
+    
 };
 
-// Build a method that will grab the URL of the random pokemon (pokemonApp.randomPokemon)
+// create a method that will tally the pokemon name length 
+pokemonApp.tallyName = (pokemonObject) => {
+    let longestName = ""
+    pokemonObject.results.forEach( (pokemon) => {
+        if (pokemon.name.length > longestName.length) {
+            longestName = pokemon.name;
+        }
+    }) 
+    console.log(`${longestName} is the longest character name with ${longestName.length}`);
+    
+    let numOfPokemon = 0;
+    let charLength = 0;
+    pokemonApp.numOfCharLength = {};
+    // initial setting numOfCharLength to 0
+    for (let index = 0; index <= longestName.length; index++) {
+        pokemonApp.numOfCharLength[index] = 0;
+    };
 
-pokemonApp.randomPokemon = (datafromApi) => {
+    pokemonObject.results.forEach( (pokemon) => {
+        // only get pokemon that contains letters
+        if (/^[a-zA-Z]+$/.test(pokemon.name)) {
+            // console.log(pokemon.name);
+            while (charLength <= longestName.length) {
+                // console.log(charLength);
+                // console.log(longestName.length);
+                if (pokemon.name.length == charLength) {
+                    // console.log(pokemon.name.length);
+                    numOfPokemon++;
+                    console.log(numOfPokemon, pokemon.name, pokemon.name.length);
+                    pokemonApp.numOfCharLength[charLength] = pokemonApp.numOfCharLength[charLength] + 1;
+                }
+                charLength++;
+            }
+            charLength = 0;
+        }
+        // total number of pokemons
+        pokemonApp.numOfCharLength[0] = numOfPokemon;
+    }) 
+    console.log(pokemonApp.numOfCharLength);
+    
+}
+// Build a method that will grab the URL of the random pokemon (pokemonApp.randomPokemon)
+pokemonApp.randomPokemon = () => {
+    let pokeInfo = "";
+    // let pokeNameLength = 0;
+    
+    // do while loop to only choose pokemons that contains only letters
+    // do {
     // creating a variable to choose a random pokemon
-    const randomIndex = Math.floor(Math.random() * pokemonApp.limit);
-    // console.log(randomIndex);
+    randomIndex = Math.floor(Math.random() * pokemonApp.limit + 1);
     
     // Calling the array with the random number given to find the pokemon
-    const randomPokemonUrl = datafromApi.results[randomIndex].url;
-    // const randomPokemonPic = randomPokemonData.sprites.other."official-artwork"."front_default";
-    // console.log(randomPokemonPic);
-    // console.log(randomPokemonUrl);
-    fetch(randomPokemonUrl)
+    pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${randomIndex}`
+    // randomPokemonUrl = datafromApi.results[randomIndex].url;//}
+    // while (!/^[a-zA-Z]+$/.test(datafromApi.results[randomIndex].name) == true);
+    
+    fetch(pokemonUrl)
     .then (function(aResponse) {
         return aResponse.json()
     })
-    
     .then (function(jResponse) {
-        // console.log(jResponse);
         pokemonApp.chosenPokemon(jResponse);
+        console.log(jResponse.forms[0]);
+        pokeName = jResponse.forms[0];
         
+        // console.log(jResponse.forms[0].name.length)
+        // pokeNameLength = jResponse.forms[0].name.length;
+        // console.log(/^[a-zA-Z]+$/.test(jResponse.forms[0].name));
+        if (!/^[a-zA-Z]+$/.test(jResponse.forms[0].name)) {
+            pokemonApp.randomPokemon();
+        }
     })
+    // } while (!/^[a-zA-Z]+$/.test(pokeName))
+    console.log(pokeInfo);
+    pokemonApp.colourRings();
 }
 
 // Build a method that will display the picture of the chosen pokemon and append it (pokemonApp.chosenPokemon)
@@ -74,9 +122,9 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
     // console.log(dataFromRandomPokemon);
     // create variable to hold picture URL given from pokeAPI.co
     pokemonApp.chosenPokemonPicture = dataFromRandomPokemon.sprites.other['official-artwork']['front_default'];
-    console.log(dataFromRandomPokemon.name);
+
     pokemonApp.chosenPokemonName = dataFromRandomPokemon.name;
-    console.log(pokemonApp.chosenPokemonPicture);
+
 
     // look for the img
     // const img = document.createElement('img')
@@ -250,7 +298,7 @@ pokemonApp.colourRings = () => {
 
         // call the to create get 50 ring locations
         pokemonApp.ringLocation();
-
+        
         // draw the rings on the canva
         for (let i = 0; i < pokemonApp.totalRings; i++){
             pokemonApp.drawRing(pokemonApp.ringLocation[i].x, pokemonApp.ringLocation[i].y, pokemonApp.ringLocation[i].color)
@@ -424,16 +472,24 @@ pokemonApp.eventListenerSetUp = () => {
     document.querySelector('main').addEventListener('click', (e) => {
         if (e.target.className === "playAgain") {
             document.querySelector('main div').removeChild(document.querySelector('.answerTab'));
-        pokemonApp.playAgain();
+            pokemonApp.playAgain();
         }
     });
+    
+    
+    // document.querySelector('#nameLength').addEventListener('change', function() {
+    //     console.log("changed");
+    //     console.log(this);
+    //     console.log(this.value);
+    //     pokemonApp.getPokemon();
+    // })
 };
 
 //create a method that holds a play again feature
 pokemonApp.playAgain = () => {
     // clear canvas
     pokemonApp.canvas.clearRect(0, 0, 300, 150);
-    pokemonApp.getPokemon();
+    pokemonApp.randomPokemon();
 };
 
 
@@ -457,13 +513,13 @@ pokemonApp.answerTab = () => {
 
     // append to section
     sectionElement.appendChild(imgDiv).appendChild(imgElement);
-
+    
     // create div to hold the pokemon name
     const textDiv = document.createElement('div');
     textDiv.classList.add('textContainer', 'flexContainer');
     const textElement = document.createElement('h2');
     textElement.textContent = pokemonApp.chosenPokemonName;
-
+    
     // create a button for play again
     const buttonElement = document.createElement('button')
     buttonElement.classList.add('playAgain');
@@ -473,9 +529,10 @@ pokemonApp.answerTab = () => {
     
     buttonElement.textContent = "Play again";
     
-
+    
     // append to section
     sectionElement.appendChild(textDiv).append(textElement, buttonElement);
+
 
     //append section to main
     document.querySelector('main .wrapper').append(sectionElement);
