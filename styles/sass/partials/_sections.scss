@@ -122,12 +122,13 @@ main .wrapper {
     width: 60%;
     max-width: 1050px;
     height: calc(720 / 1280 * 60vw);
+    max-height: 720px;
     // margin: 0 auto;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50% , -50% );
-    border: 1px solid royalblue;
+    // border: 1px solid royalblue;
     // * { border: 2px solid darkgreen}
     justify-content: space-evenly;
     .imgContainer {

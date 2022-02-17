@@ -436,12 +436,12 @@ main .wrapper {
   width: 60%;
   max-width: 1050px;
   height: calc(720 / 1280 * 60vw);
+  max-height: 720px;
   position: absolute;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  border: 1px solid royalblue;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
