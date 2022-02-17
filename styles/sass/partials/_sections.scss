@@ -81,14 +81,7 @@ main .wrapper {
         width: 100%;
         height: 200px;
         background-color: $secondary;
-        p {
-            .greenWord {
-                color: green;
-            }
-            .yellowWord {
-                color: yellow;
-            }
-        }
+
     }
     .inputContainer {
         width: 100%;
@@ -102,6 +95,15 @@ main .wrapper {
         }
     }
 }
+
+
+            .greenWord {
+                color: green;
+            }
+            .yellowWord {
+                color: yellow;
+            }
+
 
 .helpTab {
     background-color: #ffde00;

@@ -284,9 +284,12 @@ pokemonApp.helpTab = () => {
     helpTabDivElement.classList.add('helpTab')
     // helpTabDivElement.id = 'helpTab'
     helpTabDivElement.innerHTML = `
-        <p>How to play</p>
         <p>Guess that Pokemon in six tries.</p>
+        <p>Hit the enter button or click the pokeball to submit.</p>
         <p>After each guess, the number of rings decrease.</p>
+        <p>Also after each guess, the colour of the letters will change to show how close your guess was to the Pokemon.</p>
+        <p><span class="greenWord">Green</span>: The letter is in the word and in the correct spot.</p>
+        <p><span class="yellowWord">Yellow</span>: The letter is in the word but in the wrong spot.</p>
     `;
     return helpTabDivElement
 }

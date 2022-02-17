@@ -398,12 +398,6 @@ main .wrapper {
   height: 200px;
   background-color: #57b453;
 }
-.rightPanel .textContainer p .greenWord {
-  color: green;
-}
-.rightPanel .textContainer p .yellowWord {
-  color: yellow;
-}
 .rightPanel .inputContainer {
   width: 100%;
 }
@@ -414,6 +408,14 @@ main .wrapper {
 .rightPanel .inputContainer .submit {
   width: 20%;
   background-color: #ae0000;
+}
+
+.greenWord {
+  color: green;
+}
+
+.yellowWord {
+  color: yellow;
 }
 
 .helpTab {
