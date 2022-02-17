@@ -181,7 +181,6 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
                 // added this so the user can't keep clicking 
                 numberOfGuesses = 6;
 
-
             } else if (numberOfGuesses < 5) {
                 numberOfGuesses = numberOfGuesses + 1;
                 // document.querySelector('.rightPanel').querySelector('p').innerText = "That is wrong.  Please try again!";
