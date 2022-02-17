@@ -16,7 +16,8 @@
             <label for="help"><i class="fas fa-solid fa-question"></i></label>
             <input type="checkbox" name="help" id="help" checked>
             <h1>PokemonxWordle</h1>
-            <i class="fas fa-solid fa-chart-line"></i>
+            <input type="checkbox" name="stat" id="stat" checked>
+            <label for="stat"><i class="fas fa-solid fa-chart-line"></i></label>
         </div><!-- END .wrapper END -->
     </header>
 
@@ -49,13 +50,16 @@
                 </div><!-- END .textContainer END -->
 
                 <!-- START .inputContainer START -->
-                <div class="inputContainer flexContainer">
+                <form class="inputContainer flexContainer">
                     <label for="guess" class="sr-only">Guess your Pokemon</label>
                     <input type="text" id="guess" placeholder="Guess your Pokemon">
                     <button class="submit" type="submit"><img src="./assets/pokeball.png" alt=""></button>
-                </div><!-- END .inputContainer END -->
+                </form><!-- END .inputContainer END -->
             </section><!-- END .rightPanel END -->
         </div><!-- END .wrapper END -->
+
+        <p id="playAgain">play again</p>
+
 
     </main>
     <footer>
