@@ -181,7 +181,7 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
                 
                 // creating a variable to display the users guess
                 let userGuessDisplay = document.createElement("p");
-                userGuessDisplay.classList.add(".slide-in-left");
+                userGuessDisplay.classList.add(".slide-in-right");
 
                 // adding a text of 1) , 2) etc.
                 userGuessDisplay.textContent = `${numberOfGuesses + 1}) `;
@@ -348,6 +348,7 @@ pokemonApp.helpTab = () => {
     helpTabDivElement.classList.add('helpTab')
     // helpTabDivElement.id = 'helpTab'
     helpTabDivElement.innerHTML = `
+        <h3>How to Play!</h3>
         <p>Guess that Pokemon in six tries.</p>
         <p>Hit the enter button or click the pokeball to submit.</p>
         <p>After each guess, the number of rings decrease.</p>
