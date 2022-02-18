@@ -325,6 +325,7 @@ pokemonApp.helpTab = () => {
     helpTabDivElement.classList.add('helpTab')
     // helpTabDivElement.id = 'helpTab'
     helpTabDivElement.innerHTML = `
+        <h3>How to Play!</h3>
         <p>Guess that Pokemon in six tries.</p>
         <p>Hit the enter button or click the pokeball to submit.</p>
         <p>After each guess, the number of rings decrease.</p>
