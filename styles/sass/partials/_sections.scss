@@ -1,9 +1,13 @@
-.slide-in-left {
-	animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+.slide-in-right {
+	animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .wobble-hor-bottom:hover {
 	animation: wobble-hor-bottom 0.8s both;
+}
+
+.flicker {
+    animation: flicker 0.5s linear both;
 }
 
 
@@ -58,8 +62,9 @@ main .wrapper {
 }
 
 .banner {
+    border: 1px solid pink;
     position: absolute;
-    width: 30vh;
+    width: 50vh;
     min-width: 200px;
     left: 50%;
     top: -70px;
@@ -115,7 +120,7 @@ main .wrapper {
         border: 2px solid black;
         padding: 10px;
         p {
-	        animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 
         }
         
