@@ -1,6 +1,5 @@
 // Create app object (pokemonApp)
 const pokemonApp = {};
-
 // creating an apiURL
 
 pokemonApp.apiURL = 'https://pokeapi.co/api/v2/pokemon/';
@@ -69,7 +68,7 @@ pokemonApp.tallyName = (pokemonObject) => {
                 if (pokemon.name.length == charLength) {
                     // console.log(pokemon.name.length);
                     numOfPokemon++;
-                    console.log(numOfPokemon, pokemon.name, pokemon.name.length);
+                    // console.log(numOfPokemon, pokemon.name, pokemon.name.length);
                     pokemonApp.numOfCharLength[charLength] = pokemonApp.numOfCharLength[charLength] + 1;
                 }
                 charLength++;
@@ -161,10 +160,15 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
 
         document.querySelector('form').addEventListener('submit', (e) => {
             e.preventDefault();
+            const userInput = document.querySelector('#guess');
+            // user input has to:
+                // have a value 
+                // no more than 10 characters long
+                // no special characters or numbers 
+            if (userInput.value && userInput.value.length < 11 && /^[a-zA-Z]+$/.test(userInput.value)){
             // added an if statement to only allow the user to guess if guesses < 6
             if ( numberOfGuesses < 6) {
                 // tracking the user input of the pokemon name guess
-                const userInput = document.querySelector('#guess');
                 console.log(userInput.value.toLowerCase());
                 
                 // add value to the object of totalGuesses.
@@ -271,7 +275,7 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
 
             }
 
-
+        }
         });
     
 }
@@ -338,7 +342,6 @@ pokemonApp.randomColour = () => {
 };
 
 
-// create a method that will open up a "how to play" tab
 // create a method that creates the helpTab
 pokemonApp.helpTab = () => {
     helpTabDivElement = document.createElement('div');
@@ -431,32 +434,84 @@ pokemonApp.help = () => {
 
 // create a method which sets up all of the event listeners within this app
 pokemonApp.eventListenerSetUp = () => {
-    // event listener for when the ? is clicked 
     let i = 0;
-    document.querySelector('.fa-question').addEventListener('click', () => {
-        // console.log("eventlistener status: ", document.getElementById('help').checked);
-        pokemonApp.help();
-        // console.log('--------');
-    });
-
-        document.querySelector('.fa-chart-line').addEventListener('click', () => {
+    
+    document.querySelector('.fa-chart-line').addEventListener('click', () => {
         // console.log('STATISTICS RULE!');
-
         pokemonApp.displayScoreboard(i);
         // added a variable of i so that the scoreboard won't display first time when refreshing.
         i = i + 1;
     })
     
-    //event listerner to close th helpTab when you click anyhere on the page
+
+    // // Trying to figure out how to remove help tab when clicking anywhere but the tab
+    // document.querySelector('html').addEventListener('click', (e) => {
+    //     console.log("I CLICKED ON HTML", e);
+    //     // console.log(document.getElementById('#help'));
+    //     // if ( e.target != document.querySelector('.fa-question')) {
+    //     //     document.querySelector('main').removeChild(document.querySelector('.helpTab'))
+    //     // }
+    //     console.log("=================");
+    // })
+
+    // Trying to figure out how to remove help tab when clicking anywhere but the tab why does HTML GOES OFF TWICE
+    // document.querySelector('html').addEventListener('click', (e) => {
+    //     console.log("I CLICKED ON HTML", e);
+    //     // console.log(document.getElementById('#help'));
+    //     if ( e.target == document.querySelector('.fa-question')) {
+    //         console.log("im going off becuase of question");
+    //         // document.querySelector('main').removeChild(document.querySelector('.helpTab'))
+    //     } else if (e.target == document.getElementById('help')) {
+    //         console.log('element id help');
+    //     } else if (e.target == document.querySelector(".helpTab")) {
+    //         console.log("class help tab");
+    //     } else {console.log("im going off becuase of html");}
+    //     console.log("=================");
+    // })
+
+    // event listener for when the ? is clicked 
+    document.querySelector('.fa-question').addEventListener('click', (e) => {
+        console.log(">>>>>>>>>>>>>>>>>>I CLICKE ON QUESTION", e);
+        // console.log("eventlistener status: ", document.getElementById('help').checked);
+        pokemonApp.help();
+        // console.log('--------');
+    });
+    
+    console.log(document.querySelectorAll(".helpTab p"));
+    //p[0]
+    // const helpParagraphs = document.querySelectorAll(".helpTab p");
+    // const paragraphData = [];
+    // helpParagraphs.forEach((helpParagraph) => {
+        //     paragraphData.push(helpParagraph);
+        //     });
+        
+        
+        // paragraphData.addEventListener("click", (event) => {
+            // console.log("paragraph clicked", event);
+            // });
+            
+            
+            
+            
+
+    // DO NOT DELETE
+    // event listerner to close th helpTab when you click anyhere on the page
     document.querySelector('html').addEventListener('click', (e) => {
-        //except when you click on the ? again
-        if (e.target === document.querySelector('.fa-question') || e.target === document.getElementById('help')) {
+        console.log("I CLICKED ON", e);
+        console.log(document.querySelectorAll(".helpTab p"));
+        console.log(document.querySelector('.fa-question'));
+        console.log(document.querySelector('.helpTab'));
+        
+
+        if (e.target === document.querySelector('.fa-question') || e.target === document.getElementById('help') || e.target === document.querySelector(".helpTab") || e.target === document.querySelectorAll("p") || e.target.matches('.helpTab p') || e.target.matches('.helpTab p span')) {
+            console.log("if sttatemet", e);
             return;
         } else if (document.querySelector('.helpTab')) {
             // else remove the helpTab
             document.querySelector('main').removeChild(document.querySelector('.helpTab'))
         };
     })
+
 
     // event listener when play again is clicked
     document.querySelector('main').addEventListener('click', (e) => {
