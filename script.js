@@ -177,6 +177,7 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
                 
                 // creating a variable to display the users guess
                 let userGuessDisplay = document.createElement("p");
+                userGuessDisplay.classList.add(".slide-in-left");
 
                 // adding a text of 1) , 2) etc.
                 userGuessDisplay.textContent = `${numberOfGuesses + 1}) `;
@@ -186,6 +187,7 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
                     // console.log(userInputArray[i]);
                     // create a span element
                     const span = document.createElement('span');
+                    
 
                     // check variable to check if the letter is included in the string "pokemonName"
                     const check = pokemonName.includes(userInputArray[i]);
