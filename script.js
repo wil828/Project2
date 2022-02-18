@@ -98,7 +98,7 @@ pokemonApp.randomPokemon = () => {
         }
     })
     pokemonApp.colourRings();
-    pokemonApp.stats.totalGuesses++;
+    pokemonApp.stats.totalGames++;
 }
 
 // Build a method that will display the picture of the chosen pokemon and append it (pokemonApp.chosenPokemon)
