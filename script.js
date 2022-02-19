@@ -190,6 +190,7 @@ pokemonApp.helpTab = () => {
     // helpTabDivElement.id = 'helpTab'
     helpTabDivElement.innerHTML = `
         <h3>How to Play!</h3>
+        <i class="fa-solid fa-xmark"></i>
         <p>Guess that Pokemon in six tries.</p>
         <p>Hit the enter button or click the pokeball to submit.</p>
         <p>After each guess, the number of rings decrease.</p>
@@ -226,6 +227,7 @@ pokemonApp.scoreboardDisplay = () => {
     scoreboardDisplayDivElement.id = 'scoreboardDisplay'
     scoreboardDisplayDivElement.innerHTML = `
         <h3>Scoreboard!</h3>
+        <i class="fa-solid fa-xmark"></i>
         <p>So far you have guessed the Pokemon in these amount of times:</p>
         <ul>
             <li>1 Try: ${pokemonApp.stats.tries1} </li>
@@ -234,9 +236,9 @@ pokemonApp.scoreboardDisplay = () => {
             <li>4 Tries: ${pokemonApp.stats.tries4}</li>
             <li>5 Tries: ${pokemonApp.stats.tries5}</li>
             <li>6 Tries: ${pokemonApp.stats.tries6}</li>
-            <li>Total Amount of Tries: ${pokemonApp.stats.totalGuesses} </li>
-            <li>Total Amount of Games Played: ${pokemonApp.stats.totalGames} </li>
-            <li>Total Amount of Correct Pokemon: ${pokemonApp.stats.totalCorrect} </li>
+            <li>Total Tries: ${pokemonApp.stats.totalGuesses} </li>
+            <li>Games Played: ${pokemonApp.stats.totalGames} </li>
+            <li>Correct Pokemons: ${pokemonApp.stats.totalCorrect} </li>
         </ul>
     `;
     return scoreboardDisplayDivElement
@@ -301,7 +303,7 @@ pokemonApp.eventListenerSetUp = () => {
     // event listener to close the scoreboard when yo click anywher on the page
     document.querySelector('html').addEventListener('click', (e) => {
         console.log(">>>>>>>>>>>>", e);
-        if (e.target == document.querySelector('.fa-chart-line') || e.target == document.querySelector(".scoreboardDisplay") || e.target == document.querySelector('.scoreboardDisplay h3') || e.target.matches('.scoreboardDisplay li')) {
+        if (e.target == document.querySelector('.fa-chart-line') || e.target == document.querySelector(".scoreboardDisplay") || e.target == document.querySelector('.scoreboardDisplay h3') || e.target == document.querySelector('.scoreboardDisplay p') || e.target.matches('.scoreboardDisplay ul') || e.target.matches('.scoreboardDisplay li')) {
             //do nothing
         }
         else if (document.querySelector('.scoreboardDisplay')) {

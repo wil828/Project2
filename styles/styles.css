@@ -1,5 +1,6 @@
 /* _setup.scss */
 @import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Ubuntu&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@800&display=swap");
 html {
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
@@ -566,11 +567,10 @@ input, button {
 
 /* _typography.scss */
 h1 {
-  font-family: "Ubuntu", sans-serif;
-  font-size: 2rem;
-  margin: 0;
-  padding: 0;
-  color: #57b453;
+  font-family: "Roboto Serif", sans-serif;
+  font-size: 4rem;
+  color: white;
+  text-shadow: 2px 2px 0 #57b453, 2px -2px 0 #57b453, -2px 2px 0 #57b453, -2px -2px 0 #57b453, 2px 0px 0 #57b453, 0px 2px 0 #57b453, -2px 0px 0 #57b453, 0px -2px 0 #57b453, 2px 2px 2px rgba(206, 89, 55, 0);
 }
 
 h2 {
@@ -584,6 +584,7 @@ h2 {
 h3 {
   font-family: "Ubuntu", sans-serif;
   font-size: 1.5rem;
+  display: inline;
 }
 
 p {
@@ -663,15 +664,16 @@ main .wrapper {
           box-shadow: 0px 10px 20px 10px rgba(0, 0, 0, 0.5);
   position: relative;
 }
+main .wrapper * {
+  border: 1px dotted #fcfcfc;
+}
 
 .banner {
   position: absolute;
-  width: 50vh;
-  min-width: 400px;
   left: 50%;
   top: -60px;
-  -webkit-transform: translate(-43%);
-          transform: translate(-43%);
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -681,13 +683,21 @@ main .wrapper {
           flex-direction: row;
 }
 .banner img {
-  width: 40%;
+  width: 400px;
 }
 .banner h1 {
-  width: 60%;
-  -webkit-transform: translateY(35%);
-          transform: translateY(35%);
-  font-size: clamp(0.8rem, 0.3171rem + 2.4146vw, 3rem);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transform: translateY(30%);
+          transform: translateY(30%);
+  margin-left: 10px;
+}
+.banner span {
+  display: inline;
+  color: black;
+  text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1), 1px 1px 1px rgba(0, 0, 0, 0.5);
+  padding-right: 10px;
 }
 
 .leftPanel, .rightPanel {
@@ -737,9 +747,9 @@ main .wrapper {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -751,6 +761,7 @@ main .wrapper {
   border-radius: 15px;
   border: 2px solid black;
   padding: 10px;
+  margin-bottom: 66px;
 }
 .rightPanel .textContainer p {
   -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
@@ -795,7 +806,9 @@ main .wrapper {
 .helpTab {
   background-image: url("../assets/pokemonWallpaper.jpg");
   background-size: cover;
-  background-position: bottom center;
+  background-position: top center;
+  width: 647px;
+  height: 382px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -809,6 +822,12 @@ main .wrapper {
 }
 .helpTab h3 {
   margin-bottom: 10px;
+}
+
+.helpTab .fa-solid, .scoreboardDisplay .fa-solid {
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }
 
 .answerTab {
@@ -863,6 +882,8 @@ main .wrapper {
   background-size: cover;
   background-position: bottom center;
   position: fixed;
+  width: 647px;
+  height: 382px;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
@@ -882,4 +903,141 @@ footer {
   position: relative;
   margin-bottom: 10px;
   bottom: 0;
+}
+
+@media (max-width: 1100px) {
+  .banner {
+    min-width: 200px;
+    top: -70px;
+    left: 41%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .banner img {
+    width: 60%;
+  }
+  .banner h1 {
+    width: 40%;
+    -webkit-transform: translateY(15%);
+            transform: translateY(15%);
+    text-align: center;
+    margin-left: 0;
+    font-size: clamp(1rem, -0.4595rem + 7.2973vw, 4rem);
+  }
+  .banner h1 span {
+    display: block;
+  }
+}
+@media (max-width: 900px) {
+  main .wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+
+  .spine {
+    height: 10px;
+    width: 100%;
+    border: solid black;
+    border-width: 2px 0 2px 0;
+  }
+
+  .helpTab, .scoreboardDisplay {
+    width: 300px;
+    height: 680px;
+    background-position: top right;
+  }
+  .helpTab p, .helpTab li, .scoreboardDisplay p, .scoreboardDisplay li {
+    padding: 5px 0;
+  }
+
+  .leftPanel {
+    margin-top: 75px;
+  }
+
+  .rightPanel {
+    margin-top: 50px;
+  }
+  .rightPanel .textContainer {
+    margin-bottom: 30px;
+  }
+  .rightPanel .textContainer p {
+    -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+            animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  .rightPanel .inputContainer {
+    margin-top: 10px;
+  }
+  .rightPanel .inputContainer input {
+    width: 80%;
+    background-color: #b6b8b6;
+  }
+  .rightPanel .inputContainer .submit {
+    width: 20%;
+    background-color: #ae0000;
+    border-radius: 10px;
+    border: 2px solid black;
+    margin-left: 10px;
+  }
+}
+@media (max-width: 480px) {
+  main .wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+
+  .spine {
+    height: 10px;
+    width: 100%;
+    border: solid black;
+    border-width: 2px 0 2px 0;
+  }
+
+  .helpTab, .scoreboardDisplay {
+    width: 300px;
+    height: 500px;
+    background-position: top left;
+  }
+  .helpTab p, .helpTab li, .scoreboardDisplay p, .scoreboardDisplay li {
+    padding: 5px 0;
+  }
+
+  .helpTab {
+    padding: 10px;
+  }
+
+  .banner {
+    min-width: 100px;
+    top: -60px;
+    left: 43%;
+  }
+  .leftPanel {
+    margin-top: 50px;
+  }
+
+  .rightPanel .textContainer {
+    margin-bottom: 30px;
+  }
+  .rightPanel .textContainer p {
+    -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+            animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  .rightPanel .inputContainer {
+    margin-top: 10px;
+  }
+  .rightPanel .inputContainer input {
+    width: 80%;
+    background-color: #b6b8b6;
+  }
+  .rightPanel .inputContainer .submit {
+    width: 20%;
+    background-color: #ae0000;
+    border-radius: 10px;
+    border: 2px solid black;
+    margin-left: 10px;
+  }
 }
