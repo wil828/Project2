@@ -488,17 +488,30 @@ pokemonApp.answerTab = () => {
     // create div to hold the pokemon name
     const textDiv = document.createElement('div');
     textDiv.classList.add('textContainer', 'flexContainer');
+    const playAgainDiv = document.createElement('div');
     const textElement = document.createElement('h2');
     textElement.textContent = pokemonApp.chosenPokemonName;
     
-    // create a button for play again
-    const buttonElement = document.createElement('button')
-    buttonElement.classList.add('playAgain');
-    buttonElement.id = 'playAgain';    
-    buttonElement.textContent = "Play again";
+    // create a button for play again and text
+    const buttonParagraghElement = document.createElement('p');
+    const buttonElement = document.createElement('button');
+    const imgButtonElement = document.createElement('img');
+    buttonElement.classList.add('playAgain', 'pulsate-bck');
+    buttonElement.id = 'playAgain';
+    buttonParagraghElement.innerHTML = "Play Again";
+    // console.log(buttonElement);
+    // console.log(document.querySelector('main button'));
+    imgButtonElement.src = "./assets/pokemon-go.png";
+    imgButtonElement.classList.add('playAgain');
+    console.log(imgButtonElement);
+    
+    buttonElement.appendChild(imgButtonElement);
+    playAgainDiv.append(buttonParagraghElement, buttonElement);
+    
+    // buttonElement.textContent = "Play again";
     
     // append to section
-    sectionElement.appendChild(textDiv).append(textElement, buttonElement);
+    sectionElement.appendChild(textDiv).append(textElement, playAgainDiv);
     
     //append sectin to main
     document.querySelector('main .wrapper').append(sectionElement);

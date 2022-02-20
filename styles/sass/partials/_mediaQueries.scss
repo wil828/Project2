@@ -90,9 +90,12 @@
         justify-content: center;
         align-items: center;
         width: 60%;
-        height: calc(1200 / 720 * 60vw);
+        height: calc(800 / 650 * 60vw);
         .textContainer {
             width: 100%; 
+            p {
+                padding: 20px;
+            }
         }
     }
 }
@@ -157,6 +160,8 @@
             }
         }
     }
-
+    .answerTab {
+        height: 360px;
+    }
 
 }

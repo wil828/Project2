@@ -2,12 +2,29 @@
 	animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
+
 .wobble-hor-bottom:hover {
 	animation: wobble-hor-bottom 0.8s both;
 }
 
 .flicker {
     animation: flicker 0.5s linear both;
+}
+
+.tilt-in-fwd-tr {
+    animation: tilt-in-fwd-tr 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.tilt-in-fwd-tl {
+	animation: tilt-in-fwd-tl 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.puff-in-center {
+	animation: puff-in-center 0.7s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
+}
+
+.pulsate-bck:hover {
+	animation: pulsate-bck 0.5s ease-in-out infinite both;
 }
 
 
@@ -84,6 +101,11 @@ main .wrapper {
         text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5);
         padding-right: 10px;
     }
+    span {
+        color: black;
+        text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5);
+    }
+
 }
 
 .leftPanel, .rightPanel {
@@ -173,6 +195,8 @@ main .wrapper {
 }
 
 .helpTab {
+    // background-color: #ffde00;
+    animation: tilt-in-fwd-tl 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     background-image: url("../assets/pokemonWallpaper.jpg");
     background-size: cover;
     background-position: top center;
@@ -186,6 +210,7 @@ main .wrapper {
     border-radius: 10px;
     border: 2px solid black;
     box-shadow: 0px 10px 20px 10px rgba(0,0,0,0.5);
+    
     h3 {
         margin-bottom: 10px;
     }
@@ -220,6 +245,8 @@ main .wrapper {
     left: 50%;
     transform: translate(-50% , -50% );
     justify-content: space-evenly;
+    animation: puff-in-center 0.5s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
+
     .imgContainer {
         width: 45%;
         max-width: 375px;
@@ -234,14 +261,17 @@ main .wrapper {
             width: 50%;
             padding: 10px;
             border-radius: 10px;
+            background-color: transparent;
             &:hover, &:focus {
-                background-color: $primary;
+                // background-color: $primary;
             }
         }
     }
 }
 
 .scoreboardDisplay {
+	animation: tilt-in-fwd-tr 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    // background-color: #ffde00;
     background-image: url("../assets/pokemonWallpaper.jpg");
     background-size: cover;
     background-position: bottom center;
