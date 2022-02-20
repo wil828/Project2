@@ -589,6 +589,7 @@ h3 {
 
 p {
   font-family: "Ubuntu", sans-serif;
+  font-size: 1.3rem;
 }
 
 footer p {
@@ -791,11 +792,11 @@ main .wrapper {
           box-shadow: inset -1px 3px 8px 5px #575857, 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 
-.greenWord {
-  color: green;
+.correctPosition {
+  color: #5357B4;
 }
 
-.yellowWord {
+.correctLetter {
   color: yellow;
 }
 
@@ -820,10 +821,16 @@ main .wrapper {
   margin-bottom: 10px;
 }
 
+.helpTab, .scoreboardDisplay {
+  padding: 50px;
+}
 .helpTab .fa-solid, .scoreboardDisplay .fa-solid {
   position: absolute;
   right: 10px;
   top: 10px;
+}
+.helpTab p, .scoreboardDisplay p {
+  font-size: 1rem;
 }
 
 .answerTab {
@@ -832,7 +839,7 @@ main .wrapper {
   background-position: top center;
   background-size: cover;
   border-radius: 10px;
-  border: 10px solid black;
+  border: 2px solid black;
   width: 60%;
   max-width: 1050px;
   height: calc(720 / 1280 * 60vw);
@@ -884,7 +891,6 @@ main .wrapper {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  padding: 50px;
   border-radius: 10px;
   border: 2px solid black;
   -webkit-box-shadow: 0px 10px 20px 10px rgba(0, 0, 0, 0.5);
@@ -946,20 +952,17 @@ footer {
 
   .helpTab, .scoreboardDisplay {
     width: 300px;
-    height: 680px;
-    background-position: top right;
+    height: auto;
+    background-position: top center;
   }
   .helpTab p, .helpTab li, .scoreboardDisplay p, .scoreboardDisplay li {
     padding: 5px 0;
   }
 
-  .leftPanel {
-    margin-top: 75px;
+  .leftPanel, .rightPanel {
+    margin-top: calc(60 / 900 * 100vw);
   }
 
-  .rightPanel {
-    margin-top: 50px;
-  }
   .rightPanel .textContainer {
     margin-bottom: 30px;
   }
@@ -1019,15 +1022,10 @@ footer {
 
   .helpTab, .scoreboardDisplay {
     width: 300px;
-    height: 500px;
     background-position: top left;
   }
   .helpTab p, .helpTab li, .scoreboardDisplay p, .scoreboardDisplay li {
     padding: 5px 0;
-  }
-
-  .helpTab {
-    padding: 10px;
   }
 
   .banner {
@@ -1036,13 +1034,6 @@ footer {
     left: 43%;
   }
 
-  .leftPanel {
-    margin-top: 50px;
-  }
-
-  .rightPanel .textContainer {
-    margin-bottom: 30px;
-  }
   .rightPanel .textContainer p {
     -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
             animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;

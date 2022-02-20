@@ -26,7 +26,6 @@
     .answerTab {
         width: 75vw;
     }
-
 }
 
 
@@ -47,19 +46,19 @@
 
     .helpTab, .scoreboardDisplay {
         width: 300px;
-        height: 680px;
-        background-position: top right;
+        height: auto;
+        background-position: top center;
         p, li {
             padding: 5px 0;
         }
     }
 
-    .leftPanel {
-        margin-top: 75px;
+    .leftPanel, .rightPanel {
+        margin-top: calc(60 / 900 * 100vw);
     }
 
     .rightPanel {
-        margin-top: 50px;
+        // margin-top: 50px;
         .textContainer {
             margin-bottom: 30px;
             p {
@@ -114,15 +113,11 @@
 
     .helpTab, .scoreboardDisplay {
         width: 300px;
-        height: 500px;
+        // height: 500px;
         background-position: top left;
         p, li {
             padding: 5px 0;
         }
-    }
-
-    .helpTab {
-        padding: 10px;
     }
 
     .banner {
@@ -131,13 +126,13 @@
         left: 43%;
     }
 
-    .leftPanel {
-        margin-top: 50px;
-    }
+    // .leftPanel {
+    //     margin-top: 50px;
+    // }
 
     .rightPanel {
         .textContainer {
-            margin-bottom: 30px;
+            // margin-bottom: 30px;
             p {
                 animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
             }

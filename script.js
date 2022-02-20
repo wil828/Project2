@@ -191,8 +191,8 @@ pokemonApp.helpTab = () => {
         <p>Hit the enter button or click the pokeball to submit.</p>
         <p>After each guess, the number of rings decrease.</p>
         <p>Also after each guess, the colour of the letters will change to show how close your guess was to the Pokemon.</p>
-        <p><span class="greenWord">Green</span>: The letter is in the word and in the correct spot.</p>
-        <p><span class="yellowWord">Yellow</span>: The letter is in the word but in the wrong spot.</p>
+        <p><span class="correctPosition">Blue</span>: The letter is in the word and in the correct spot.</p>
+        <p><span class="correctLetter">Yellow</span>: The letter is in the word but in the wrong spot.</p>
     `;
     return helpTabDivElement;
 };
@@ -297,6 +297,12 @@ pokemonApp.eventListenerSetUp = () => {
         } else if (document.querySelector('.helpTab')) {
             document.querySelector('main').removeChild(document.querySelector('.helpTab'))
         };
+        // if (document.querySelector('.helpTab')) {
+        //     while ( e.target != document.querySelector('.helpTab')) {
+        //         console.log(e.target);
+        //         document.querySelector('main').removeChild(document.querySelector('.helpTab'))
+        //     }
+        // }
     })
 
     // event listener to close the scoreboard when yo click anywher on the page except the scoreboard itself
@@ -376,15 +382,15 @@ pokemonApp.eventListenerSetUp = () => {
                     const check = pokemonApp.pokemonName.includes(userInputArray[i]);
                     // console.log(check);
 
-                    // check to see if the letter[i] matches with the letter[i] for both arrays.  If so give it a class of greenWord.
+                    // check to see if the letter[i] matches with the letter[i] for both arrays.  If so give it a class of correctPosition.
                     if (userInputArray[i] === pokemonApp.pokemonNameArray[i]){
                         // console.log('got one Right!');
 
-                        //give a variable of greenWord to hold the letter
-                        const greenWord = `${userInputArray[i]}`;
+                        //give a variable of correctPosition to hold the letter
+                        const correctPosition = `${userInputArray[i]}`;
 
-                        // add a class of greenWord
-                        span.classList.add('greenWord');
+                        // add a class of correctPosition
+                        span.classList.add('correctPosition');
 
                         // give a value of the innertext
                         span.innerText = `${userInputArray[i]}`;
@@ -392,11 +398,11 @@ pokemonApp.eventListenerSetUp = () => {
                         // append child span to the paragraph tag "userGuessDisplay"
                         userGuessDisplay.appendChild(span);
 
-                    // check to see if the check variable is true.  If so, give it a class of yellowWord. 
+                    // check to see if the check variable is true.  If so, give it a class of correctLetter. 
                     } else if (check === true){
 
-                        const yellowWord = userInputArray[i]
-                        span.classList.add('yellowWord');
+                        const correctLetter = userInputArray[i]
+                        span.classList.add('correctLetter');
                         span.innerText = `${userInputArray[i]}`
                         userGuessDisplay.appendChild(span);
 

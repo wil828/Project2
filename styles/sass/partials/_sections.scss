@@ -165,10 +165,10 @@ main .wrapper {
     }
 }
 
-.greenWord {
-    color: green;
+.correctPosition {
+    color: #5357B4;
 }
-.yellowWord {
+.correctLetter {
     color: yellow;
 }
 
@@ -193,10 +193,14 @@ main .wrapper {
 }
 
 .helpTab, .scoreboardDisplay {
+    padding: 50px;
     .fa-solid {
         position: absolute;
         right: 10px;
         top: 10px;
+    }
+    p {
+        font-size: 1rem;
     }
 }
 
@@ -206,7 +210,7 @@ main .wrapper {
     background-position: top center;
     background-size: cover;
     border-radius: 10px;
-    border: 10px solid black;
+    border: 2px solid black;
     width: 60%;
     max-width: 1050px;
     height: calc(720 / 1280 * 60vw);
@@ -247,7 +251,6 @@ main .wrapper {
     top: 50%;
     left: 50%;
     transform: translate(-50% , -50% );
-    padding: 50px;
     border-radius: 10px;
     border: 2px solid black;
     box-shadow: 0px 10px 20px 10px rgba(0,0,0,0.5);
