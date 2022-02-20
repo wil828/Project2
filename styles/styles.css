@@ -632,8 +632,7 @@ header .wrapper {
       -ms-flex-pack: justify;
           justify-content: space-between;
   border-radius: 30px 30px 0 0;
-  border: solid black;
-  border-width: 2px 2px 2px 2px;
+  border: 2px solid black;
   -webkit-box-shadow: 0px -10px 20px 10px rgba(0, 0, 0, 0.35);
           box-shadow: 0px -10px 20px 10px rgba(0, 0, 0, 0.35);
 }
@@ -663,9 +662,6 @@ main .wrapper {
   -webkit-box-shadow: 0px 10px 20px 10px rgba(0, 0, 0, 0.5);
           box-shadow: 0px 10px 20px 10px rgba(0, 0, 0, 0.5);
   position: relative;
-}
-main .wrapper * {
-  border: 1px dotted #fcfcfc;
 }
 
 .banner {
@@ -836,7 +832,7 @@ main .wrapper * {
   background-position: top center;
   background-size: cover;
   border-radius: 10px;
-  border: 3px solid black;
+  border: 10px solid black;
   width: 60%;
   max-width: 1050px;
   height: calc(720 / 1280 * 60vw);
@@ -928,6 +924,10 @@ footer {
   .banner h1 span {
     display: block;
   }
+
+  .answerTab {
+    width: 75vw;
+  }
 }
 @media (max-width: 900px) {
   main .wrapper {
@@ -981,6 +981,26 @@ footer {
     border: 2px solid black;
     margin-left: 10px;
   }
+
+  .answerTab {
+    background-position: top left;
+    min-width: 325px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 60%;
+    height: calc(1200 / 720 * 60vw);
+  }
+  .answerTab .textContainer {
+    width: 100%;
+  }
 }
 @media (max-width: 480px) {
   main .wrapper {
@@ -1033,6 +1053,21 @@ footer {
   .rightPanel .inputContainer input {
     width: 80%;
     background-color: #b6b8b6;
+  }
+  .rightPanel .inputContainer input::-webkit-input-placeholder {
+    font-size: 0.9rem;
+  }
+  .rightPanel .inputContainer input::-moz-placeholder {
+    font-size: 0.9rem;
+  }
+  .rightPanel .inputContainer input:-ms-input-placeholder {
+    font-size: 0.9rem;
+  }
+  .rightPanel .inputContainer input::-ms-input-placeholder {
+    font-size: 0.9rem;
+  }
+  .rightPanel .inputContainer input::placeholder {
+    font-size: 0.9rem;
   }
   .rightPanel .inputContainer .submit {
     width: 20%;

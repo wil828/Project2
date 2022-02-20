@@ -7,14 +7,14 @@ pokemonApp.apiURL = 'https://pokeapi.co/api/v2/pokemon/';
 // Create initialization method (pokemonApp.init)
 pokemonApp.init = () => {
     // new variable for amount of pokemon
-    pokemonApp.limit = 151;
+    pokemonApp.limit = 1;
     // variable for the amount of rings displayed
     pokemonApp.totalRings = 50;
     pokemonApp.getPokemon();
     pokemonApp.randomPokemon();
     pokemonApp.help();
     pokemonApp.eventListenerSetUp();
-
+    pokemonApp.blur = 20;
 };
 
 // Create a method which will request information for the API (pokemonApp.getPokemon)
@@ -80,7 +80,7 @@ pokemonApp.tallyName = (pokemonObject) => {
 pokemonApp.randomPokemon = () => {
     let pokeInfo = "";
 
-    randomIndex = Math.floor(Math.random() * pokemonApp.limit + 1);
+    randomIndex = Math.floor(Math.random() * pokemonApp.limit + 4);
     
     // Calling the array with the random number given to find the pokemon
     pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${randomIndex}`
@@ -110,6 +110,8 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
     pokemonApp.chosenPokemonName = dataFromRandomPokemon.name;
 
     document.querySelector('.leftPanel img').src = pokemonApp.chosenPokemonPicture
+    document.querySelector('.leftPanel img').style.filter = `blur(${pokemonApp.blur}px)`;
+    console.log(document.querySelector('.leftPanel img').style.blur);
 
     // adding a variable to keep track of guesses
     pokemonApp.numberOfGuesses = 0;
