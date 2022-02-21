@@ -123,6 +123,7 @@ main .wrapper {
 }
 
 .leftPanel {
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     .imgContainer {
@@ -141,6 +142,13 @@ main .wrapper {
         position: absolute;
         top: 0;
         border: 2px solid black;
+    }
+    //working here
+    input[type=radio] {
+        margin: 10px
+    }
+    input[type=radio]:checked, input[type=radio]:hover {
+        animation: pulse 2s linear infinite;
     }
 }
 

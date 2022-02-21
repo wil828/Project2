@@ -686,6 +686,42 @@ template {
             transform: scale(1);
   }
 }
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 black;
+            box-shadow: 0 0 0 0 black;
+  }
+  0% {
+    -webkit-box-shadow: 0 0 0 50px black;
+            box-shadow: 0 0 0 50px black;
+  }
+  0% {
+    -webkit-box-shadow: 0 0 0 50px black;
+            box-shadow: 0 0 0 50px black;
+  }
+  0% {
+    -webkit-box-shadow: 0 0 0 0 black;
+            box-shadow: 0 0 0 0 black;
+  }
+}
+@keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 black;
+            box-shadow: 0 0 0 0 black;
+  }
+  0% {
+    -webkit-box-shadow: 0 0 0 50px black;
+            box-shadow: 0 0 0 50px black;
+  }
+  0% {
+    -webkit-box-shadow: 0 0 0 50px black;
+            box-shadow: 0 0 0 50px black;
+  }
+  0% {
+    -webkit-box-shadow: 0 0 0 0 black;
+            box-shadow: 0 0 0 0 black;
+  }
+}
 /* _baseStyles.scss */
 * {
   margin: 0;
@@ -896,6 +932,10 @@ main .wrapper {
 }
 
 .leftPanel {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -921,6 +961,13 @@ main .wrapper {
   position: absolute;
   top: 0;
   border: 2px solid black;
+}
+.leftPanel input[type=radio] {
+  margin: 10px;
+}
+.leftPanel input[type=radio]:checked, .leftPanel input[type=radio]:hover {
+  -webkit-animation: pulse 2s linear infinite;
+          animation: pulse 2s linear infinite;
 }
 
 .rightPanel {
