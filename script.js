@@ -9,12 +9,13 @@ pokemonApp.init = () => {
     // new variable for amount of pokemon
     pokemonApp.limit = 1;
     // variable for the amount of rings displayed
-    pokemonApp.totalRings = 50;
+    pokemonApp.totalRings = 40;
+    pokemonApp.blur = 0;
     pokemonApp.getPokemon();
     pokemonApp.randomPokemon();
     pokemonApp.help();
     pokemonApp.eventListenerSetUp();
-    pokemonApp.blur = 20;
+
 };
 
 // Create a method which will request information for the API (pokemonApp.getPokemon)
@@ -346,7 +347,7 @@ pokemonApp.eventListenerSetUp = () => {
 
     // added an event listener for when the submit button is pressed and increase the amount of guesses,
         // compare user input to displayed pokemon and append user input to list
-    document.querySelector('form').addEventListener('submit', (e) => {
+    document.forms["userGuess"].addEventListener('submit', (e) => {
         e.preventDefault();
         const userInput = document.querySelector('#guess');
         // VALIDATION - user input has to:
@@ -413,11 +414,11 @@ pokemonApp.eventListenerSetUp = () => {
                 };
 
                 // append the userGuessDisplay (p tag) to the rightpanel.
-                document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
+                document.querySelector('.rightPanel .textContainer').appendChild(userGuessDisplay);
 
                 if ( pokemonApp.chosenPokemonName === userInput.value.toLowerCase()) {
 
-                    document.querySelector('.rightPanel').querySelector('p').innerHTML = "";
+                    document.querySelector('.rightPanel .textContainer').innerHTML = "";
 
                         pokemonApp.stats.totalCorrect++;
 
@@ -439,7 +440,7 @@ pokemonApp.eventListenerSetUp = () => {
 
                 } else if ( pokemonApp.numberOfGuesses === 5) {
                     // document.querySelector('.rightPanel').querySelector('p').appendChild(userGuessDisplay);
-                    document.querySelector('.rightPanel').querySelector('p').innerHTML = "";
+                    document.querySelector('.rightPanel .textContainer').innerHTML = "";
                     pokemonApp.numberOfGuesses = pokemonApp.numberOfGuesses + 1;
                     pokemonApp.answerTab();
                 };
@@ -459,6 +460,38 @@ pokemonApp.eventListenerSetUp = () => {
                 userInput.classList.remove('flicker');
             }, 500);
         };
+    });
+
+    // event listener for the difficulty
+    const difficulty = document.forms["options"].elements["difficulty"];
+    difficulty.forEach( (level) => {
+        level.addEventListener('click', (e) => {
+            e.preventDefault();
+            // only allow to change difficulty at the start of a new round
+            if (document.querySelector('.rightPanel .textContainer').childElementCount == 0) {
+                if (level.id == "none") {
+                    console.log("This level has no difficulty");
+                    pokemonApp.totalRings = 0;
+                    pokemonApp.blur = 0;
+                    pokemonApp.playAgain();
+                } else if (level.id == "easy") {
+                    console.log("This level is easy");
+                    pokemonApp.totalRings = 40;
+                    pokemonApp.blur = 0;
+                    pokemonApp.playAgain();
+                } else if (level.id == "medium") {
+                    console.log("This level is medium");
+                    pokemonApp.totalRings = 50;
+                    pokemonApp.blur = 10;
+                    pokemonApp.playAgain();
+                } else if (level.id == "hard") {
+                    console.log("This level is hard");
+                    pokemonApp.totalRings = 80;
+                    pokemonApp.blur = 20;
+                    pokemonApp.playAgain();
+                }
+            }
+        })
     });
 };
 

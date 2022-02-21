@@ -47,17 +47,27 @@
                     <!-- chosen pokemon will be displayed here -->
                     <img>
                 </div><!-- END .imgContainer END -->
+                <form name="options">
+                    <label for="none" class="sr-only">No Difficulty</label>
+                    <input type="radio" name="difficulty" id="none">
+                    <label for="easy" class="sr-only">Easy</label>
+                    <input type="radio" name="difficulty" id="easy">
+                    <label for="medium" class="sr-only">Medium</label>
+                    <input type="radio" name="difficulty" id="medium">
+                    <label for="hard" class="sr-only">Hard</label>
+                    <input type="radio" name="difficulty" id="hard">
+                </form>
             </section><!-- END .leftPanel END -->
             <section class="spine" id="spine"></section>
             <!-- START .rightPanel START -->
             <section class="rightPanel flexContainer" id="rightPanel">
                 <!-- START .textContainer START -->
                 <div class="textContainer">
-                    <p></p>
+                    <!-- <p></p> -->
                     <!-- currently a place to display you win / you lose will replace with wordle if time permits -->
                 </div><!-- END .textContainer END -->
                 <!-- START .inputContainer START -->
-                <form class="inputContainer flexContainer">
+                <form name="userGuess" class="inputContainer flexContainer">
                     <label for="guess" class="sr-only">Guess your Pokemon</label>
                     <input type="text" id="guess" maxlength = "10" placeholder="Guess your Pokemon">
                     <button class="submit" type="submit"><img src="./assets/pokeball.png" alt=""></button>
