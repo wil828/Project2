@@ -1,0 +1,167 @@
+//responsive design for 1100px
+@media (max-width: 1100px) {
+        .banner {
+        // width: 10vw;
+        min-width: 200px;
+        top: -70px;
+        left: 41%;
+        // transform: translate(0% 50%);
+        display: flex;
+        // flex-direction: column;
+        img {
+            width: 60%;
+        }
+        h1 {
+            width: 40%;
+            transform: translateY(15%);
+            text-align: center;
+            margin-left: 0;
+            font-size: clamp(1rem, -0.4595rem + 7.2973vw, 4rem);
+            // flex-direction: column;
+            span {
+                display: block;
+            }
+        }
+    }
+    .answerTab {
+        width: 75vw;
+    }
+}
+
+
+
+
+// responsive design for 900px
+@media (max-width: 900px) {
+    main .wrapper{
+        flex-direction: column;
+    }
+
+    .spine {
+        height: 10px;
+        width: 100%;
+        border: solid black;
+        border-width: 2px 0 2px 0;
+    }
+
+    .helpTab, .scoreboardDisplay {
+        width: 300px;
+        height: auto;
+        background-position: top center;
+        p, li {
+            padding: 5px 0;
+        }
+    }
+
+    .leftPanel, .rightPanel {
+        margin-top: calc(60 / 900 * 100vw);
+    }
+
+    .rightPanel {
+        // margin-top: 50px;
+        .textContainer {
+            margin-bottom: 30px;
+            p {
+                animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+            }
+        }
+        .inputContainer {
+            margin-top: 10px;
+            input {
+                width: 80%;
+                background-color: #b6b8b6;
+            };
+            
+            .submit {
+                width: 20%;
+                background-color: $primary;
+                // border-radius: 0px 10px 10px 0px;
+                border-radius: 10px;
+                border: 2px solid black;
+                margin-left: 10px;
+            }
+        }
+    }
+
+    .answerTab {
+        background-position: top left;
+        min-width: 325px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 60%;
+        height: calc(800 / 650 * 60vw);
+        .textContainer {
+            width: 100%; 
+            p {
+                padding: 20px;
+            }
+        }
+    }
+}
+
+// max width for 480px
+@media (max-width: 480px) {
+    
+    main .wrapper{
+        flex-direction: column;
+    }
+
+    .spine {
+        height: 10px;
+        width: 100%;
+        border: solid black;
+        border-width: 2px 0 2px 0;
+    }
+
+    .helpTab, .scoreboardDisplay {
+        width: 300px;
+        // height: 500px;
+        background-position: top left;
+        p, li {
+            padding: 5px 0;
+        }
+    }
+
+    .banner {
+        min-width: 100px;
+        top: -60px;
+        left: 43%;
+    }
+
+    // .leftPanel {
+    //     margin-top: 50px;
+    // }
+
+    .rightPanel {
+        .textContainer {
+            // margin-bottom: 30px;
+            p {
+                animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+            }
+        }
+        .inputContainer {
+            margin-top: 10px;
+            input {
+                width: 80%;
+                background-color: #b6b8b6;
+                &::placeholder {
+                    font-size: 0.9rem;
+                }
+            };
+            
+            .submit {
+                width: 20%;
+                background-color: $primary;
+                // border-radius: 0px 10px 10px 0px;
+                border-radius: 10px;
+                border: 2px solid black;
+                margin-left: 10px;
+            }
+        }
+    }
+    .answerTab {
+        height: 360px;
+    }
+
+}

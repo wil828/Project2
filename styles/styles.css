@@ -728,9 +728,7 @@ input, button {
 /* _typography.scss */
 h1 {
   font-family: "Roboto Serif", sans-serif;
-  font-size: 2rem;
-  margin: 0;
-  padding: 0;
+  font-size: 4rem;
   color: white;
   text-shadow: 2px 2px 0 #57b453, 2px -2px 0 #57b453, -2px 2px 0 #57b453, -2px -2px 0 #57b453, 2px 0px 0 #57b453, 0px 2px 0 #57b453, -2px 0px 0 #57b453, 0px -2px 0 #57b453, 2px 2px 2px rgba(206, 89, 55, 0);
 }
@@ -746,10 +744,12 @@ h2 {
 h3 {
   font-family: "Ubuntu", sans-serif;
   font-size: 1.5rem;
+  display: inline;
 }
 
 p {
   font-family: "Ubuntu", sans-serif;
+  font-size: 1.3rem;
 }
 
 footer p {
@@ -813,8 +813,7 @@ header .wrapper {
       -ms-flex-pack: justify;
           justify-content: space-between;
   border-radius: 30px 30px 0 0;
-  border: solid black;
-  border-width: 2px 2px 2px 2px;
+  border: 2px solid black;
   -webkit-box-shadow: 0px -10px 20px 10px rgba(0, 0, 0, 0.35);
           box-shadow: 0px -10px 20px 10px rgba(0, 0, 0, 0.35);
 }
@@ -848,12 +847,10 @@ main .wrapper {
 
 .banner {
   position: absolute;
-  width: 50vh;
-  min-width: 400px;
   left: 50%;
   top: -60px;
-  -webkit-transform: translate(-44%);
-          transform: translate(-44%);
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -863,14 +860,21 @@ main .wrapper {
           flex-direction: row;
 }
 .banner img {
-  width: 40%;
+  width: 400px;
 }
 .banner h1 {
-  width: 60%;
-  -webkit-transform: translateY(39%);
-          transform: translateY(39%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transform: translateY(30%);
+          transform: translateY(30%);
   margin-left: 10px;
-  font-size: clamp(0.8rem, 0.3171rem + 2.4146vw, 3rem);
+}
+.banner span {
+  display: inline;
+  color: black;
+  text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1), 1px 1px 1px rgba(0, 0, 0, 0.5);
+  padding-right: 10px;
 }
 .banner span {
   color: black;
@@ -924,9 +928,9 @@ main .wrapper {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -938,6 +942,7 @@ main .wrapper {
   border-radius: 15px;
   border: 2px solid black;
   padding: 10px;
+  margin-bottom: 66px;
 }
 .rightPanel .textContainer p {
   -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
@@ -971,11 +976,11 @@ main .wrapper {
           box-shadow: inset -1px 3px 8px 5px #575857, 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 
-.greenWord {
-  color: green;
+.correctPosition {
+  color: #5357B4;
 }
 
-.yellowWord {
+.correctLetter {
   color: yellow;
 }
 
@@ -984,7 +989,9 @@ main .wrapper {
           animation: tilt-in-fwd-tl 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   background-image: url("../assets/pokemonWallpaper.jpg");
   background-size: cover;
-  background-position: bottom center;
+  background-position: top center;
+  width: 647px;
+  height: 382px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -1000,13 +1007,25 @@ main .wrapper {
   margin-bottom: 10px;
 }
 
+.helpTab, .scoreboardDisplay {
+  padding: 50px;
+}
+.helpTab .fa-solid, .scoreboardDisplay .fa-solid {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.helpTab p, .scoreboardDisplay p {
+  font-size: 1rem;
+}
+
 .answerTab {
   background-image: url(../assets/answerTabBG.jpg);
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
   border-radius: 10px;
-  border: 3px solid black;
+  border: 2px solid black;
   width: 60%;
   max-width: 1050px;
   height: calc(720 / 1280 * 60vw);
@@ -1044,11 +1063,8 @@ main .wrapper {
   width: 50%;
   padding: 10px;
   border-radius: 10px;
+  background-color: transparent;
 }
-.answerTab .textContainer button:hover, .answerTab .textContainer button:focus {
-  background-color: #ae0000;
-}
-
 .scoreboardDisplay {
   -webkit-animation: tilt-in-fwd-tr 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
           animation: tilt-in-fwd-tr 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
@@ -1056,11 +1072,12 @@ main .wrapper {
   background-size: cover;
   background-position: bottom center;
   position: fixed;
+  width: 647px;
+  height: 382px;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  padding: 50px;
   border-radius: 10px;
   border: 2px solid black;
   -webkit-box-shadow: 0px 10px 20px 10px rgba(0, 0, 0, 0.5);
@@ -1075,4 +1092,173 @@ footer {
   position: relative;
   margin-bottom: 10px;
   bottom: 0;
+}
+
+@media (max-width: 1100px) {
+  .banner {
+    min-width: 200px;
+    top: -70px;
+    left: 41%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .banner img {
+    width: 60%;
+  }
+  .banner h1 {
+    width: 40%;
+    -webkit-transform: translateY(15%);
+            transform: translateY(15%);
+    text-align: center;
+    margin-left: 0;
+    font-size: clamp(1rem, -0.4595rem + 7.2973vw, 4rem);
+  }
+  .banner h1 span {
+    display: block;
+  }
+
+  .answerTab {
+    width: 75vw;
+  }
+}
+@media (max-width: 900px) {
+  main .wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+
+  .spine {
+    height: 10px;
+    width: 100%;
+    border: solid black;
+    border-width: 2px 0 2px 0;
+  }
+
+  .helpTab, .scoreboardDisplay {
+    width: 300px;
+    height: auto;
+    background-position: top center;
+  }
+  .helpTab p, .helpTab li, .scoreboardDisplay p, .scoreboardDisplay li {
+    padding: 5px 0;
+  }
+
+  .leftPanel, .rightPanel {
+    margin-top: calc(60 / 900 * 100vw);
+  }
+
+  .rightPanel .textContainer {
+    margin-bottom: 30px;
+  }
+  .rightPanel .textContainer p {
+    -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+            animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  .rightPanel .inputContainer {
+    margin-top: 10px;
+  }
+  .rightPanel .inputContainer input {
+    width: 80%;
+    background-color: #b6b8b6;
+  }
+  .rightPanel .inputContainer .submit {
+    width: 20%;
+    background-color: #ae0000;
+    border-radius: 10px;
+    border: 2px solid black;
+    margin-left: 10px;
+  }
+
+  .answerTab {
+    background-position: top left;
+    min-width: 325px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 60%;
+    height: calc(800 / 650 * 60vw);
+  }
+  .answerTab .textContainer {
+    width: 100%;
+  }
+  .answerTab .textContainer p {
+    padding: 20px;
+  }
+}
+@media (max-width: 480px) {
+  main .wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+
+  .spine {
+    height: 10px;
+    width: 100%;
+    border: solid black;
+    border-width: 2px 0 2px 0;
+  }
+
+  .helpTab, .scoreboardDisplay {
+    width: 300px;
+    background-position: top left;
+  }
+  .helpTab p, .helpTab li, .scoreboardDisplay p, .scoreboardDisplay li {
+    padding: 5px 0;
+  }
+
+  .banner {
+    min-width: 100px;
+    top: -60px;
+    left: 43%;
+  }
+
+  .rightPanel .textContainer p {
+    -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+            animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  .rightPanel .inputContainer {
+    margin-top: 10px;
+  }
+  .rightPanel .inputContainer input {
+    width: 80%;
+    background-color: #b6b8b6;
+  }
+  .rightPanel .inputContainer input::-webkit-input-placeholder {
+    font-size: 0.9rem;
+  }
+  .rightPanel .inputContainer input::-moz-placeholder {
+    font-size: 0.9rem;
+  }
+  .rightPanel .inputContainer input:-ms-input-placeholder {
+    font-size: 0.9rem;
+  }
+  .rightPanel .inputContainer input::-ms-input-placeholder {
+    font-size: 0.9rem;
+  }
+  .rightPanel .inputContainer input::placeholder {
+    font-size: 0.9rem;
+  }
+  .rightPanel .inputContainer .submit {
+    width: 20%;
+    background-color: #ae0000;
+    border-radius: 10px;
+    border: 2px solid black;
+    margin-left: 10px;
+  }
+
+  .answerTab {
+    height: 360px;
+  }
 }
