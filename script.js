@@ -464,6 +464,7 @@ pokemonApp.eventListenerSetUp = () => {
 
     // event listener for the difficulty
     const difficulty = document.forms["options"].elements["difficulty"];
+    console.log(difficulty);
     difficulty.forEach( (level) => {
         level.addEventListener('click', (e) => {
             e.preventDefault();
