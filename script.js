@@ -7,7 +7,7 @@ pokemonApp.apiURL = 'https://pokeapi.co/api/v2/pokemon/';
 // Create initialization method (pokemonApp.init)
 pokemonApp.init = () => {
     // new variable for amount of pokemon
-    pokemonApp.limit = 1;
+    pokemonApp.limit = 151;
     // variable for the amount of rings displayed
     pokemonApp.totalRings = 40;
     pokemonApp.blur = 0;
@@ -81,7 +81,7 @@ pokemonApp.init = () => {
 // Build a method that will grab the URL of the random pokemon (pokemonApp.randomPokemon)
 pokemonApp.randomPokemon = () => {
 
-    randomIndex = Math.floor(Math.random() * pokemonApp.limit + 4);
+    randomIndex = Math.floor(Math.random() * pokemonApp.limit);
     
     // Calling the array with the random number given to find the pokemon
     pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${randomIndex}`
@@ -101,7 +101,7 @@ pokemonApp.randomPokemon = () => {
     });
 
     pokemonApp.colourRings();
-    pokemonApp.stats.totalGames++;
+    // pokemonApp.stats.totalGames++;
 };
 
 // Build a method that will display the picture of the chosen pokemon and append it (pokemonApp.chosenPokemon)
@@ -516,6 +516,8 @@ pokemonApp.playAgain = () => {
 
 //create a method that will display the chosen pokemon's picture and name upon 
 pokemonApp.answerTab = () => {
+    pokemonApp.stats.totalGames++;
+
 
     const sectionElement = document.createElement('section');
     sectionElement.classList.add('answerTab', 'flexContainer');
