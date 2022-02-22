@@ -18,66 +18,6 @@ pokemonApp.init = () => {
 
 };
 
-// // Create a method which will request information for the API (pokemonApp.getPokemon)
-// // Currently not in use
-// pokemonApp.getPokemon = () => {
-//     const url = new URL(pokemonApp.apiURL);
-//     url.search = new URLSearchParams({
-//         limit : pokemonApp.limit,
-//     });
-
-//     fetch(url)
-//     .then (function(apiResponse) {
-//         return apiResponse.json()
-//     })
-//     .then (function(jsonResponse) {
-//         pokemonApp.tallyName(jsonResponse);
-//     });
-// };
-
-// // create a method that will tally the pokemon name length 
-// // Currently not in use
-// pokemonApp.tallyName = (pokemonObject) => {
-//     let longestName = "";
-//     pokemonObject.results.forEach( (pokemon) => {
-//         if (pokemon.name.length > longestName.length) {
-//             longestName = pokemon.name;
-//         }
-//     }) 
-
-//     console.log(`${longestName} is the longest character name with ${longestName.length}`);
-    
-//     let numOfPokemon = 0;
-//     let charLength = 0;
-//     pokemonApp.numOfCharLength = {};
-//     // initial setting numOfCharLength to 0
-//     for (let index = 0; index <= longestName.length; index++) {
-//         pokemonApp.numOfCharLength[index] = 0;
-//     };
-
-//     pokemonObject.results.forEach( (pokemon) => {
-//         // only get pokemon that contains letters
-//         if (/^[a-zA-Z]+$/.test(pokemon.name)) {
-//             // console.log(pokemon.name);
-//             while (charLength <= longestName.length) {
-//                 // console.log(charLength);
-//                 // console.log(longestName.length);
-//                 if (pokemon.name.length == charLength) {
-//                     // console.log(pokemon.name.length);
-//                     numOfPokemon++;
-//                     // console.log(numOfPokemon, pokemon.name, pokemon.name.length);
-//                     pokemonApp.numOfCharLength[charLength] = pokemonApp.numOfCharLength[charLength] + 1;
-//                 }
-//                 charLength++;
-//             }
-//             charLength = 0;
-//         }
-//         // total number of pokemons
-//         pokemonApp.numOfCharLength[0] = numOfPokemon;
-//     }) 
-//     console.log(pokemonApp.numOfCharLength);
-// };
-
 // Build a method that will grab the URL of the random pokemon (pokemonApp.randomPokemon)
 pokemonApp.randomPokemon = () => {
 
@@ -93,7 +33,6 @@ pokemonApp.randomPokemon = () => {
     .then (function(jResponse) {
         pokemonApp.chosenPokemon(jResponse);
         pokeName = jResponse.forms[0];
-        console.log(jResponse.forms[0].name);
         // if the pokemon return contains special characters or numbers run again
         if (!/^[a-zA-Z]+$/.test(jResponse.forms[0].name)) {
             pokemonApp.randomPokemon();
@@ -101,7 +40,6 @@ pokemonApp.randomPokemon = () => {
     });
 
     pokemonApp.colourRings();
-    // pokemonApp.stats.totalGames++;
 };
 
 // Build a method that will display the picture of the chosen pokemon and append it (pokemonApp.chosenPokemon)
@@ -213,7 +151,6 @@ pokemonApp.stats = {
 // create a method to increase the amount of tries and total guesses and correct
 pokemonApp.scoreboard = (guessNumber) => {
     pokemonApp.stats[`tries${guessNumber}`]++
-    console.log(pokemonApp.stats);
 };
 
 // create a method that creates the scoreboard
@@ -242,26 +179,13 @@ pokemonApp.scoreboardDisplay = () => {
 
 // create a method to display the scoreboard
 pokemonApp.displayScoreboard = () => {
-    // if ((document.querySelector('#scoreboardDisplay')) && (i > 0)) {
-    //     // console.log('take me AWAY!');
-    //     const divId = document.querySelector('main').querySelector('#scoreboardDisplay');
-
-    //     // if the scoreboardDisplay ID is there remove the child
-    //     document.querySelector('main').removeChild(divId);
-
-    // } else if (!document.querySelector('#scoreboardDisplay') && (i >= 0)) {
-    //     // if the scoreboardDisplay ID is not there, append it!
-    //     document.querySelector('main').append(pokemonApp.scoreboardDisplay());
-    // };
-
     // if scoreboard is not there, append
     if (!document.querySelector('#scoreboardDisplay')) {
         document.querySelector('main').append(pokemonApp.scoreboardDisplay());
-    // else if scoreboard is there, rmove
+    // else if scoreboard is there, remove
     } else if (document.querySelector('#scoreboardDisplay')) {
         document.querySelector('main').removeChild(document.querySelector('#scoreboardDisplay'));
     };
-
 };
 
 // create a method that will append or remove the helpTab
@@ -296,13 +220,7 @@ pokemonApp.eventListenerSetUp = () => {
         // else remove the helpTab
         } else if (document.querySelector('.helpTab')) {
             document.querySelector('main').removeChild(document.querySelector('.helpTab'))
-        };
-        // if (document.querySelector('.helpTab')) {
-        //     while ( e.target != document.querySelector('.helpTab')) {
-        //         console.log(e.target);
-        //         document.querySelector('main').removeChild(document.querySelector('.helpTab'))
-        //     }
-        // }
+        }
     })
 
     // event listener to close the scoreboard when yo click anywher on the page except the scoreboard itself
@@ -356,9 +274,7 @@ pokemonApp.eventListenerSetUp = () => {
         if (userInput.value && /^[a-zA-Z]+$/.test(userInput.value)){
             // added an if statement to only allow the user to guess if guesses < 6
             if ( pokemonApp.numberOfGuesses < 6) {
-                // tracking the user input of the pokemon name guess
-                console.log(userInput.value.toLowerCase());
-                
+                // tracking the user input of the pokemon name guess                
                 // add value to the object of totalGuesses.
                 pokemonApp.stats.totalGuesses++;
 
@@ -374,17 +290,14 @@ pokemonApp.eventListenerSetUp = () => {
 
                 // creating a for loop to compare the letters in the user input and pokemon name array and decide if the colour should be green, yellow, or black.
                 for (let i = 0; i < userInputArray.length; i++) {
-                    // console.log(userInputArray[i]);
                     // create a span element
                     const span = document.createElement('span');
 
                     // check variable to check if the letter is included in the string "pokemonName"
                     const check = pokemonApp.pokemonName.includes(userInputArray[i]);
-                    // console.log(check);
 
                     // check to see if the letter[i] matches with the letter[i] for both arrays.  If so give it a class of correctPosition.
                     if (userInputArray[i] === pokemonApp.pokemonNameArray[i]){
-                        // console.log('got one Right!');
 
                         //give a variable of correctPosition to hold the letter
                         const correctPosition = `${userInputArray[i]}`;
@@ -463,7 +376,6 @@ pokemonApp.eventListenerSetUp = () => {
 
     // event listener for the difficulty
     const difficulty = document.forms["options"].elements["difficulty"];
-    console.log(difficulty);
     // this prevents the checked difficulty from changing after user guess
     let defaultIndex = 1;
     difficulty[defaultIndex].checked = true;
@@ -472,36 +384,27 @@ pokemonApp.eventListenerSetUp = () => {
             // only allow to change difficulty at the start of a new round
             if (document.querySelector('.rightPanel .textContainer').childElementCount == 0) {
                 if (level.id == "none") {
-                    console.log("This level has no difficulty");
                     defaultIndex = 0;
-                    console.log(defaultIndex);
                     pokemonApp.totalRings = 0;
                     pokemonApp.blur = 0;
                     pokemonApp.playAgain();
                 } else if (level.id == "easy") {
-                    console.log("This level is easy");
                     defaultIndex = 1;
-                    console.log(defaultIndex);
                     pokemonApp.totalRings = 40;
                     pokemonApp.blur = 0;
                     pokemonApp.playAgain();
                 } else if (level.id == "medium") {
-                    console.log("This level is medium");
                     defaultIndex = 2;
-                    console.log(defaultIndex);
                     pokemonApp.totalRings = 50;
                     pokemonApp.blur = 10;
                     pokemonApp.playAgain();
                 } else if (level.id == "hard") {
-                    console.log("This level is hard");
                     defaultIndex = 3;
-                    console.log(defaultIndex);
                     pokemonApp.totalRings = 80;
                     pokemonApp.blur = 20;
                     pokemonApp.playAgain();
                 }
             } else {
-                console.log(defaultIndex);
                 difficulty[defaultIndex].checked = true;
             }
         })
@@ -526,7 +429,6 @@ pokemonApp.answerTab = () => {
     const imgDiv = document.createElement('div');
     imgDiv.classList.add('imgContainer')
     const imgElement = document.createElement('img');
-    console.log(pokemonApp.chosenPokemonPicture);
     imgElement.src = pokemonApp.chosenPokemonPicture;
 
     // append to section
@@ -546,16 +448,11 @@ pokemonApp.answerTab = () => {
     buttonElement.classList.add('playAgain', 'pulsate-bck');
     buttonElement.id = 'playAgain';
     buttonParagraghElement.innerHTML = "Play Again";
-    // console.log(buttonElement);
-    // console.log(document.querySelector('main button'));
     imgButtonElement.src = "./assets/pokemon-go.png";
     imgButtonElement.classList.add('playAgain');
-    console.log(imgButtonElement);
     
     buttonElement.appendChild(imgButtonElement);
     playAgainDiv.append(buttonParagraghElement, buttonElement);
-    
-    // buttonElement.textContent = "Play again";
     
     // append to section
     sectionElement.appendChild(textDiv).append(textElement, playAgainDiv);
