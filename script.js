@@ -206,7 +206,7 @@ pokemonApp.stats = {
     tries5: 0,
     tries6: 0,
     totalGuesses: 0,
-    totalGames: 0,
+    totalGames: 1,
     totalCorrect: 0,
 };
 
