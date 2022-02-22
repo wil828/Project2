@@ -1,5 +1,5 @@
 /* _setup.scss */
-@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Ubuntu&family=Roboto+Serif:wght@800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto+Serif:wght@800&family=Ubuntu&display=swap");
 html {
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
@@ -891,6 +891,7 @@ h3 {
 }
 
 p {
+  font-family: "Ubuntu", sans-serif;
   font-size: 1.3rem;
 }
 
