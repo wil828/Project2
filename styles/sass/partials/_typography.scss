@@ -23,9 +23,11 @@ h3 {
 }
 
 p {
-    font-family: $mainFont;
-    // line-height: 1.15;
     font-size: 1.3rem;
+}
+
+li {
+    font-family: $mainFont;
 }
 
 footer p {

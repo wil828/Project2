@@ -11,9 +11,8 @@ pokemonApp.init = () => {
     // variable for the amount of rings displayed
     pokemonApp.totalRings = 40;
     pokemonApp.blur = 0;
-    // pokemonApp.getPokemon();
     pokemonApp.randomPokemon();
-    // pokemonApp.help();
+    pokemonApp.help();
     pokemonApp.eventListenerSetUp();
 
 };
@@ -125,12 +124,12 @@ pokemonApp.helpTab = () => {
     helpTabDivElement.innerHTML = `
         <h3>How to Play!</h3>
         <i class="fa-solid fa-xmark"></i>
-        <p>Guess that Pokemon in six tries.</p>
+        <p>Guess the Pokemon in six tries.</p>
         <p>Hit the enter button or click the pokeball to submit.</p>
-        <p>After each guess, the number of rings decrease.</p>
-        <p>Also after each guess, the colour of the letters will change to show how close your guess was to the Pokemon.</p>
-        <p><span class="correctPosition">Blue</span>: The letter is in the word and in the correct spot.</p>
-        <p><span class="correctLetter">Yellow</span>: The letter is in the word but in the wrong spot.</p>
+        <p>After each guess, the colour of the letters will change and the number of rings decrease.</p>
+        <p><span class="correctPosition">Blue</span>: The letter is in the correct spot.</p>
+        <p><span class="correctLetter">Yellow</span>: The letter is in the wrong spot.</p>
+        <p>There are 4 level of difficulties you can pick and can only be changed before your first guess.</p>
     `;
     return helpTabDivElement;
 };
