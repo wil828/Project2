@@ -27,6 +27,21 @@
 	animation: pulsate-bck 0.5s ease-in-out infinite both;
 }
 
+.pulseGreen:hover, .pulseGreen:focus, #none:checked {
+    animation: pulseGreen 2s linear infinite;
+}
+.pulseYellow:hover, .pulseYellow:focus, #easy:checked {
+    animation: pulseYellow 2s linear infinite;
+}
+
+.pulseOrange:hover, .pulseOrange:focus, #medium:checked {
+    animation: pulseOrange 2s linear infinite;
+}
+
+.pulseRed:hover, .pulseRed:focus, #hard:checked {
+    animation: pulseRed 2s linear infinite;
+}
+
 
 
 /* _section.scss */
@@ -123,6 +138,7 @@ main .wrapper {
 }
 
 .leftPanel {
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     .imgContainer {
@@ -142,6 +158,32 @@ main .wrapper {
         top: 0;
         border: 2px solid black;
     }
+    //working here
+
+    form {
+        margin-top: 10px;
+    }
+
+    input[type=radio] {
+        margin: 10px;
+        width: 2rem;
+        height: 2rem;
+    }
+
+    #none {
+        accent-color: rgb(125, 245, 125);
+    }
+    #easy {
+        accent-color: rgb(253, 253, 163);
+    }
+
+    #medium {
+        accent-color: rgb(240, 182, 75);
+    }
+    #hard {
+        accent-color: rgb(211, 79, 79);
+    }
+
 }
 
 .rightPanel {
