@@ -31,7 +31,7 @@ pokemonApp.randomPokemon = () => {
     })
     .then (function(jResponse) {
         pokemonApp.chosenPokemon(jResponse);
-        pokeName = jResponse.forms[0];
+        pokemonApp.pokeName = jResponse.forms[0].name;
         // if the pokemon return contains special characters or numbers run again
         if (!/^[a-zA-Z]+$/.test(jResponse.forms[0].name)) {
             pokemonApp.randomPokemon();
@@ -48,6 +48,7 @@ pokemonApp.chosenPokemon = (dataFromRandomPokemon) => {
     pokemonApp.chosenPokemonName = dataFromRandomPokemon.name;
 
     document.querySelector('.leftPanel img').src = pokemonApp.chosenPokemonPicture
+    document.querySelector('.leftPanel img').alt = "Pokemon you are trying to guess"
     document.querySelector('.leftPanel img').style.filter = `blur(${pokemonApp.blur}px)`;
 
     // adding a variable to keep track of guesses
@@ -429,6 +430,7 @@ pokemonApp.answerTab = () => {
     imgDiv.classList.add('imgContainer')
     const imgElement = document.createElement('img');
     imgElement.src = pokemonApp.chosenPokemonPicture;
+    imgElement.alt = pokemonApp.pokeName
 
     // append to section
     sectionElement.appendChild(imgDiv).appendChild(imgElement);
@@ -448,6 +450,7 @@ pokemonApp.answerTab = () => {
     buttonElement.id = 'playAgain';
     buttonParagraghElement.innerHTML = "Play Again";
     imgButtonElement.src = "./assets/pokemon-go.png";
+    imgButtonElement.alt = "Pokemon Go logo"
     imgButtonElement.classList.add('playAgain');
     
     buttonElement.appendChild(imgButtonElement);
